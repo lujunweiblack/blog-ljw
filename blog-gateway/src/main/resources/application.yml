@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: ${blog-gateway.application.name}
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: host_route
+#        uri: lb://manager
+#        predicates:
+#        - Path=/manager/**
+#      - id: host_route
+#        uri: http://127.0.0.1:8005
+#        predicates:
+#        - Path=/api/**
+
+server:
+  port: ${blog-gateway.server.port}
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${blog-gateway.service-url.defaultZone}
