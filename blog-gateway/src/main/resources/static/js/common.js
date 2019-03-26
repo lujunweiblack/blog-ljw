@@ -21,27 +21,6 @@
     });
     /*banner*/
     $('#banner').easyFader();
-
-    /*topnav select*/
-    var obj = null;
-    var allMenu = document.getElementById('topnav').getElementsByTagName('a');
-    // console.log(allMenu);
-    obj = allMenu[0];
-    for (i = 1; i < allMenu.length; i++) {
-        if (window.location.href.indexOf(allMenu[i].href) >= 0) {
-            obj = allMenu[i];
-        }
-    }
-    obj.id = 'topnav_current';
-
-    /*mnav dl open*/
-    var oH2 = document.getElementsByTagName('h2')[0];
-    var oUl = document.getElementsByTagName('dl')[0];
-    oH2.onclick = function () {
-        var style = oUl.style;
-        style.display = style.display == 'block' ? 'none' : 'block';
-        oH2.className = style.display == 'block' ? 'open' : '';
-    };
     //菜单点击效果
     $('.list_dt').on('click', function () {
         $('.list_dd').stop();
@@ -79,19 +58,4 @@
         );
     });
     
-    //设置固定关注我们
-
-if ($('#follow-us')){
-    var followUsPosition = $('#follow-us').offset().top;
-    window.onscroll = function () {
-        var nowPosition =  document.documentElement.scrollTop;
-        if (nowPosition - followUsPosition > 0 ) {
-            setTimeout(function () {
-                $('#follow-us').attr('class','guanzhu gd');
-            },150);
-        }else {
-            $('#follow-us').attr('class','guanzhu');
-        }
-    };
-}
 });

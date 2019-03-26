@@ -89,6 +89,23 @@
 .sidenews img { height: 100%; max-height: 75px; margin: auto; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; -ms-transition: all .5s ease; -o-transition: all .5s ease; transition: all .5s ease; transition: all 0.5s; }
 .sidenews li:hover i img { transform: scale(1.1) }
 .sidenews span { font-size: 12px; color: #9A9A9A; margin-top: 10px; display: block }
+ /*clickRank_c_t */
+ .clickRank_c_t { width: 100%; height: 170px; background: #000; margin-bottom: 20px; overflow: hidden; display: block; clear: both; position: relative; }
+ .clickRank_c_t img { width: 100%; min-height: 170px; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; -ms-transition: all .5s ease; -o-transition: all .5s ease; transition: all .5s ease; }
+ .clickRank_c_t p { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 20px; font-size: 15px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; ; background: rgba(0,0,0,0.7); color: #fff; }
+ .clickRank_c_t p a { color: #fff; }
+ .clickRank_c_t:hover img { transform: scale(1.1) }
+ /*clickRank_c*/
+ .clickRank_c { }
+ .clickRank_c li { margin: 0 0 20px 0; overflow: hidden }
+ .clickRank_c li p { line-height: 24px; color: #888; font-size: 15px; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; }
+ .clickRank_c li a { color: #48494d; }
+ .clickRank_c li a:hover { color: #00A7EB; }
+ .clickRank_c i { width: 100px; height: 75px; overflow: hidden; display: block; border: #efefef 1px solid; float: left; margin-right: 10px }
+ .clickRank_c img { height: 100%; max-height: 75px; margin: auto; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; -ms-transition: all .5s ease; -o-transition: all .5s ease; transition: all .5s ease; transition: all 0.5s; }
+ .clickRank_c li:hover i img { transform: scale(1.1) }
+ .clickRank_c span { font-size: 12px; color: #9A9A9A; margin-top: 10px; display: block }
+
 /*tags*/
 .cloud { clear: both; overflow: hidden; background: #fff; margin-bottom: 20px }
 .cloud ul { overflow: hidden; font-size: 14px }
