@@ -34,7 +34,7 @@
 .blogs .blogtitle { margin: 0 0 10px 0; font-size: 20px; overflow: hidden; }
 .blogs .blogtitle a:hover { color: #337ab7; }
 .blogs .blogtext { font-size: 14px; color: #566573; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 3; margin-top: 20px }
-.bloginfo { overflow: hidden; margin-top: 30px }
+.bloginfo { overflow: hidden; margin-top: 30px;padding: 20px; }
 .bloginfo ul li { float: left; font-size: 12px; padding: 0 0 0 20px; margin: 0 15px 0 0; color: #748594; line-height: 1.5; display: inline-block; }
 .bloginfo ul li a { color: #748594; }
 .bloginfo ul li a:hover { color: #000 }
@@ -189,11 +189,11 @@ h1.t_nav { border-bottom: #bfbfbf 1px solid; font-size: 14px; font-weight: norma
 .timebox li:hover a:after { background: #3a6ab5 }
 .timebox li:hover span { color: #000 }
 /*infosbox*/
-.infosbox { float: left; width: 66%; overflow: hidden; background: #FFF; }
-.newsview { padding: 0 30px }
+.infosbox { padding: 50px;overflow: hidden; background: #FFF; }
+.newsview { padding: 0 20px }
 .intitle { line-height: 40px; height: 40px; font-size: 14px; ; border-bottom: #000 2px solid; }
 .intitle a { font-weight: normal; }
-.news_title { font-size: 24px; font-weight: normal; padding: 30px 0 0 0; color: #333; }
+.news_title { font-size: 34px; font-weight: normal; padding: 30px 0 0 0; color: #333; }
 .news_author { width: 100%; color: #999; line-height: 18px; }
 .news_author span { margin-right: 10px; padding-left: 20px }
 .au01 { background: url(../images/author2.png) no-repeat left center }
@@ -210,8 +210,8 @@ h1.t_nav { border-bottom: #bfbfbf 1px solid; font-size: 14px; font-weight: norma
 .infosbox .news_con p { margin-bottom: 25x }
 .infosbox .news_con img { max-width: 650px; height: auto; }
 .infosbox .share { padding: 20px; }
-.nextinfo { line-height: 24px; width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
-.nextinfo p { padding: 4px 10px; border-radius: 5px; }
+.nextinfo { line-height: 24px; width: 100%; background: #FFF; border-radius: 10px; overflow: hidden;margin-top: 81px;padding: 20px;}
+.nextinfo p { padding: 4px 10px; border-radius: 5px;text-align: left; }
 .nextinfo a:hover { color: #000; text-decoration: underline }
 .diggit { float:left; width: 140px; margin: auto; background: #E2523A url(../images/dzbg.jpg) no-repeat center left 10px; color: #fff; box-shadow: 1px 2px 6px 0px rgba(0,0,0,.2); border-radius: 3px; line-height: 40px; text-align: center; padding-left: 20px;margin-left: 20%; }
 .diggit a { color: #fff; }
@@ -219,7 +219,7 @@ h1.t_nav { border-bottom: #bfbfbf 1px solid; font-size: 14px; font-weight: norma
 .otherlink, .xzsm, .ffsm { width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .otherlink h2 { border-bottom: #000 2px solid; line-height: 40px; font-size: 14px; background: url(../images/5794.png) left 10px center no-repeat; padding-left: 40px; color: #000 }
 .otherlink ul { margin: 10px 0 }
-.otherlink li { line-height: 24px; height: 24px; display: block; width: 290px; float: left; overflow: hidden; margin-right: 30px; padding-left: 10px; }
+/*.otherlink li { line-height: 24px; height: 24px; display: block; width: 290px; float: left; overflow: hidden; margin-right: 30px; padding-left: 10px; }*/
 .otherlink li a:hover { text-decoration: underline; color: #000 }
 .news_pl { margin: 10px 0; width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .news_pl h2 { background: url(../images/newsbg03.png) no-repeat left 10px center; border-bottom: #000 2px solid; line-height: 40px; font-size: 14px; padding-left: 30px; color: #000 }
@@ -263,3 +263,5 @@ h1.t_nav { border-bottom: #bfbfbf 1px solid; font-size: 14px; font-weight: norma
 .shang_payselect { text-align: center; margin: 0 auto; margin-top: 40px; cursor: pointer; height: 60px; width: 280px; }
 .shang_payselect .pay_item { display: inline-block; margin-right: 10px; float: left; }
 .shang_payselect img { float: left }
+.line_ul {overflow:hidden;}
+.line_li {padding: 4px;}
