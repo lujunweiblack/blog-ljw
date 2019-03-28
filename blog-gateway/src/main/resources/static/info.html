@@ -134,7 +134,8 @@
             return null;
         }
 
-        var detailInfoId = "./md/"+getQueryString("detailInfoId")+".md";
+        var detailInfoId = "http://article.lujunwei.com/md/"+getQueryString("detailInfoId")+".md";
+        console.log(detailInfoId)
         $.get(detailInfoId, function (markdown) {
             testEditormdView = editormd.markdownToHTML("news_con_id", {
                 markdown: markdown,
