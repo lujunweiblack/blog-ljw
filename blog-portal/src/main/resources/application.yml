@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ${blog-portal.application.name}
+
+server:
+  port: ${blog-portal.server.port}
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${blog-portal.service-url.defaultZone}
