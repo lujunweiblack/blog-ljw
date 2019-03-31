@@ -20,7 +20,7 @@ public class BArticle {
     private int authorId;
     private String authorName;
     private int categoryId;
-    private int categoryName;
+    private String categoryName;
     private Date publishDate;
     private Date createDate;
     private Date updateDate;

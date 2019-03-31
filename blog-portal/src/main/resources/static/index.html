@@ -92,404 +92,136 @@
         $(".header_c").load("../common/header.html");
         $(".footer_c").load("../common/footer.html");
 
-        //假数据
-        var banner1 = {
-            bannerImageUrl: "images/banner01.jpg",
-            detailInfoId: "35001",
-            bannerName: "别让这些闹心的套路，毁了你的网页设计!",
-            bannerId: "1001"
-        };
-        var banner2 = {
-            bannerImageUrl: "images/banner02.jpg",
-            detailInfoId: "35002",
-            bannerName: "网页中图片属性固定宽度，如何用js改变大小",
-            bannerId: "1002"
-        };
-        var banner3 = {
-            bannerImageUrl: "images/banner03.jpg",
-            detailInfoId: "35003",
-            bannerName: "个人博客，属于我的小世界！",
-            bannerId: "1003"
-        };
-        var banner4 = {
-            bannerImageUrl: "images/toppic01.jpg",
-            detailInfoId: "35004",
-            bannerName: "别让这些闹心的套路，毁了你的网页设计!35004",
-            bannerId: "1004",
-            bannerLabel: "静静冥想"
-        };
-        var banner5 = {
-            bannerImageUrl: "images/zd01.jpg",
-            detailInfoId: "35005",
-            bannerName: "个人博客，属于我的小世界！35005",
-            bannerId: "1005",
-            bannerLabel: "学无止境"
-        };
 
-        //特别推荐
-        var banner6 = {
-            bannerImageUrl: "images/banner03.jpg",
-            detailInfoId: "35006",
-            bannerName: "帝国cms调用方法",
-            bannerId: "1006",
-            bannerLabel: "学无止境"
-        };
-        var banner7 = {
-            bannerImageUrl: "images/b04.jpg",
-            detailInfoId: "35007",
-            bannerName: "5.20 我想对你说",
-            bannerId: "1007",
-            bannerLabel: "学无止境"
-        };
-        var banner8 = {
-            bannerImageUrl: "images/b05.jpg",
-            detailInfoId: "35008",
-            bannerName: "个人博客，属于我的小世界！",
-            bannerId: "1009",
-            bannerLabel: "学无止境"
-        };
+        function timestampToDate(timestamp){
+            var d = new Date(timestamp);    //根据时间戳生成的时间对象
+            var date = (d.getFullYear()) + "-" +
+                (d.getMonth() + 1) + "-" +
+                (d.getDate()) + " ";
+                // (d.getHours()) + ":" +
+                // (d.getMinutes()) + ":" +
+                // (d.getSeconds())
+            ;
+            return date;
+        }
 
-        //推荐文章
-        var banner9 = {
-            bannerImageUrl: "images/toppic01.jpg",
-            detailInfoId: "35009",
-            bannerName: "别让这些闹心的套路，毁了你的网页设计",
-            bannerId: "1009",
-            bannerLabel: "学无止境",
-            createDate: '2014-01-21'
-        };
-        var banner10 = {
-            bannerImageUrl: "images/toppic01.jpg",
-            detailInfoId: "35010",
-            bannerName: "给我模板PSD源文件，我给你设计HTML！",
-            bannerId: "1009",
-            bannerLabel: "学无止境",
-            createDate: '2017-01-21'
-        };
-        var banner11 = {
-            bannerImageUrl: "images/v1.jpg",
-            detailInfoId: "35011",
-            bannerName: "别让这些闹心的套路，毁了你的网页设计",
-            bannerId: "1009",
-            bannerLabel: "学无止境",
-            createDate: '2019-02-21'
-        };
-        var banner12 = {
-            bannerImageUrl: "images/v2.jpg",
-            detailInfoId: "35012",
-            bannerName: "给我模板PSD源文件，我给你设计HTML！",
-            bannerId: "1009",
-            bannerLabel: "学无止境",
-            createDate: '2019-01-11'
-        };
+        $.ajax({
+            url: "/index",
+            type: "get",
+            async: false,
+            success: function (obj) {
+                var obj = $.parseJSON(obj);
+                var result = obj.result;
+                var bAbout = result.bAbout;
+                var bLinks = result.bLinks;
+                var bLabels = result.bLabels;
+                var bannerRightArticles = result.bannerRightArticles;
+                var bannerWheelArticles = result.bannerWheelArticles;
+                var clickRankArticles = result.clickRankArticles;
+                var ordinaryArticles = result.ordinaryArticles;
+                var recommendArticles = result.recommendArticles;
+                var specialRecoArticles = result.specialRecoArticles;
 
-        //标签云
-        var label1 = {
-            labelId: 1001,
-            labelName: '陌上花开'
-        };
-        var label2 = {
-            labelId: 1002,
-            labelName: '校园生活'
-        };
-        var label3 = {
-            labelId: 1003,
-            labelName: 'html5'
-        };
-        var label4 = {
-            labelId: 1004,
-            labelName: 'SumSung'
-        };
-        var label5 = {
-            labelId: 1005,
-            labelName: '青春'
-        };
-        var label6 = {
-            labelId: 1006,
-            labelName: '温暖'
-        };
-        var label7 = {
-            labelId: 1007,
-            labelName: '阳光'
-        };
-        var label8 = {
-            labelId: 1008,
-            labelName: '三星'
-        };
-        var label9 = {
-            labelId: 1009,
-            labelName: '索尼'
-        };
-        var label10 = {
-            labelId: 1010,
-            labelName: '华维荣耀'
-        };
-        var label11 = {
-            labelId: 1011,
-            labelName: '三星'
-        };
-        var label12 = {
-            labelId: 1012,
-            labelName: '索尼'
-        };
-        var label13 = {
-            labelId: 1012,
-            labelName: '陆军委组织'
-        };
+                //渲染banner
+                bannerWheelArticles.forEach(function (value) {
+                    $("#banner").append('<li class="slide" ><a href=info.html?articleId=' + value.articleId + ' ><img class="banner_img" src=' + value.browsePic01 + '><span class="imginfo">' + value.articleTitleName + '</span></a></li>');
+                });
 
-        //内容页
-        var blogsbox1 = {
-            blogtitle:'别让这些闹心的套路，毁了你的网页设计!',
-            blogInfoId:'22001',
-            blogpic1:'images/toppic01.jpg',
-            blogpic2:'images/avatar.jpg',
-            blogpic3:'images/avatar.jpg',
-            blogtext:'如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... ',
-            author:'Jerry',
-            lmname:'学无止境',
-            time:'2018-5-13',
-            view:'34567',
-            like:'9999'
-        };
+                bannerRightArticles.forEach(function (value) {
+                    $(".toppic").append('<li> <a href=info.html?articleId=' + value.articleId + ' > <i><img src=' + value.browsePic01 + '></i>' +
+                        '<h2>' + value.articleTitleName + '</h2>' +
+                        '<span>' + value.categoryName + '</span></a> </li>');
+                });
+                //特别推荐
+                specialRecoArticles.forEach(function (value) {
+                    $(".hometitle_c").append('<li> <i><img src=' + value.browsePic01 + '></i>' +
+                        '          <p>' + value.articleTitleName + ' <span><a href=info.html?articleId=' + value.articleId + '>阅读</a></span> </p>' +
+                        '        </li>');
+                });
+                //推荐文章
+                recommendArticles.forEach(function (value, index) {
+                    if (index === 0) {
+                        $(".tjpic").append(' <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '        <p><a href=info.html?articleId=' + value.articleId + '>' + value.articleTitleName + '</a></p>');
+                    } else {
+                        $(".sidenews").append('<li> <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '          <p><a href=info.html?articleId=' + value.articleId + '>' + value.articleTitleName + '</a></p>\n' +
+                            '          <span>' + timestampToDate(value.publishDate) + '</span> </li>');
+                    }
+                });
 
-        var blogsbox2 = {
-            blogtitle:'帝国cms 首页或者列表页 实现图文不同样式调用方法',
-            blogInfoId:'22002',
-            blogpic1:'',
-            blogpic2:'',
-            blogpic3:'',
-            blogtext:'如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... ',
-            author:'姜昆',
-            lmname:'苦海无涯',
-            time:'2019-1-11',
-            view:'12',
-            like:'20'
-        };
+                //点击排行
+                clickRankArticles.forEach(function (value, index) {
+                    if (index === 0) {
+                        $(".clickRank_c_t").append(' <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '        <p><a href=info.html?articleId=' + value.articleId + '>' + value.articleTitleName + '</a></p>');
+                    } else {
+                        $(".clickRank_c").append('<li> <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '          <p><a href=info.html?articleId=' + value.articleId + '>' + value.articleTitleName + '</a></p>\n' +
+                            '          <span>' + timestampToDate(value.publishDate) + '</span> </li>');
+                    }
 
-        var blogsbox3 = {
-            blogtitle:'别让这些闹心的套路，毁了你的网页设计!',
-            blogInfoId:'22003',
-            blogpic1:'images/avatar.jpg',
-            blogpic2:'images/toppic02.jpg',
-            blogpic3:'images/banner01.jpg',
-            blogtext:'如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... ',
-            author:'易程茂',
-            lmname:'苦海无涯',
-            time:'2011-1-30',
-            view:'313',
-            like:'56'
-        };
+                });
 
-        var blogsbox4 = {
-            blogtitle:'别让这些闹心的套路，毁了你的网页设计!',
-            blogInfoId:'22004',
-            blogpic1:'images/avatar.jpg',
-            blogtext:'如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... ',
-            author:'linda',
-            lmname:'三天三夜',
-            time:'2018-5-13',
-            view:'5563',
-            like:'45'
-        };
+                //标签云
+                bLabels.forEach(function (value) {
+                    $(".cloud_c").append('<a href="javacript:void(0);">' + value.labelName + '</a>');
+                });
 
-        var blogsbox5 = {
-            blogtitle:'别让这些闹心的套路，毁了你的网页设计!',
-            blogInfoId:'22001',
-            blogpic1:'images/bi05.jpg',
-            blogpic2:'images/banner01.jpg',
-            blogpic3:null,
-            blogtext:'如图，要实现上图效果，我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！... ',
-            author:'sanlin',
-            lmname:'中冶不寐',
-            time:'2016-5-09',
-            view:'123',
-            like:'11'
-        };
+                //友情链接
+                bLinks.forEach(function (value) {
+                    $(".links_c").append('<li><a href=' + value.linkUrl + ' target="_blank">' + value.linkName + '</a></li>');
+                });
 
-        //onRead 加载页面
-        //banner
-        var banners = [];
-        var toppic = []; //左2
-        //特别推荐
-        var hometitle = [];
-        //推荐文章
-        var sidenews = [];
-        //标签云
-        var labelCloud = [];
-        //友情链接
-        var links = [];
-        //关注我们 么么哒！
-      var guanzhuData = {
-            sinaUrl: 'https://weibo.com/5130734241/profile?rightmod=1&wvr=6&mod=personinfo',
-            sinaName: '新浪微博',
-            sinaNickName: '傻不拉几的二哈',
-            tencentUrl: 'http://t.qq.com/lu773517966?preview',
-            tencentName: '腾讯微博',
-            tencentNickName: '傻不拉几的二哈',
-            qqUrl: 'javascript:;',
-            qqName: 'QQ号',
-            qqNickName: '773517966',
-            emailUrl: 'javascript:;',
-            emailName: '邮箱帐号',
-            emailNickName: '773517966@qq.com',
-            wxgzhUrl: 'javascript:;',
-            wxgzhName: '微信号',
-            wxgzhNickName: 'zlu951314',
-            wxImageUrl: 'images/ljw.jpg'
-        };
-        //内容页
-        var blogsboxs = [];
+                //关注我们 么么哒！
+                var guanzhu = '<li class="sina"><a href=' + bAbout.sinaUrl + ' ><span>新浪</span>' + bAbout.sinaName + '</a></li>';
+                guanzhu += '<li class="tencent"><a href=' + bAbout.tencentUrl + ' ><span>腾讯</span>' + bAbout.tencentName + '</a></li>';
+                guanzhu += '<li class="qq"><a href=' + bAbout.qqUrl + ' ><span>QQ</span>' + bAbout.qqName + '</a></li>';
+                guanzhu += '<li class="email"><a href=' + bAbout.emailUrl + ' ><span>邮箱</span>' + bAbout.emailName + '</a></li>';
+                guanzhu += '<li class="wxgzh"><a href=javascript:; ><span>微信</span>' + bAbout.wxName + '</a></li>';
+                guanzhu += '<li class="wx"><img src=' + bAbout.wxImgUrl + '></li>';
+                $(".guanzhu_c").append(guanzhu);
 
-        banners.push(banner1);
-        banners.push(banner2);
-        banners.push(banner3);
+                //内容页
+                ordinaryArticles.forEach(function (value) {
 
-        toppic.push(banner4);
-        toppic.push(banner5);
+                    var temp = '<div class="blogs" data-scroll-reveal="enter bottom over 1s" >\n' +
+                        '      <h3 class="blogtitle"><a href=info.html?articleId=' + value.articleId + ' >' + value.articleTitleName + '</a></h3>\n';
 
-        hometitle.push(banner6);
-        hometitle.push(banner7);
-        hometitle.push(banner8);
+                    if (value.browsePic01 || value.browsePic02 || value.browsePic03) {
+                        temp += '<span class="bplist"><a href=info.html?articleId=' + value.articleId + ' title="">';
+                    }
 
-        sidenews.push(banner9);
-        sidenews.push(banner10);
-        sidenews.push(banner11);
-        sidenews.push(banner12);
+                    if (value.browsePic01) {
+                        temp += '<span class="blogpic"><a href=info.html?articleId=' + value.articleId + ' title=""><img src=' + value.browsePic01 + ' alt=""></a></span>';
+                    }
+                    if (value.browsePic02) {
+                        temp += '<span class="blogpic"><a href=info.html?articleId=' + value.articleId + ' title=""><img src=' + value.browsePic02 + ' alt=""></a></span>';
+                    }
+                    if (value.browsePic03) {
+                        temp += '<span class="blogpic"><a href=info.html?articleId=' + value.articleId + ' title=""><img src=' + value.browsePic03 + ' alt=""></a></span>';
+                    }
 
-        labelCloud.push(label1);
-        labelCloud.push(label2);
-        labelCloud.push(label3);
-        labelCloud.push(label4);
-        labelCloud.push(label5);
-        labelCloud.push(label6);
-        labelCloud.push(label7);
-        labelCloud.push(label8);
-        labelCloud.push(label9);
-        labelCloud.push(label10);
-        labelCloud.push(label11);
-        labelCloud.push(label12);
-        labelCloud.push(label13);
+                    if (value.browsePic01 || value.browsePic02 || value.browsePic03) {
+                        temp += '</a></span>';
+                    }
 
-        //友情链接
-        var links1 = {
-            linksId: 1001,
-            linksName: 'Jerry博客',
-            linksUrl: 'http://127.0.0.1:9000/index.html',
-        };
-        var links2 = {
-            linksId: 1002,
-            linksName: '设计师博客',
-            linksUrl: 'http://127.0.0.1:9000/index.html',
-        };
-        var links3 = {
-            linksId: 1003,
-            linksName: '优秀个人博客',
-            linksUrl: 'http://127.0.0.1:9000/index.html',
-        };
+                    temp += '      <p class="blogtext">' + value.articleIntroduction + '</p>\n' +
+                        '      <div class="bloginfo">\n' +
+                        '        <ul>\n' +
+                        '          <li class="author"><a href="/">' + value.authorName + '</a></li>\n' +
+                        '          <li class="lmname"><a href="/">' + value.categoryName + '</a></li>\n' +
+                        '          <li class="timer">' + timestampToDate(value.publishDate) + '</li>\n' +
+                        '          <li class="view"><span>' + 0 + '</span>已阅读</li>\n' +
+                        '          <li class="like">' + 0 + '</li>\n' +
+                        '        </ul>\n' +
+                        '      </div>\n' +
+                        '    </div>';
 
-        links.push(links1);
-        links.push(links2);
-        links.push(links3);
-
-        blogsboxs.push(blogsbox2);
-        blogsboxs.push(blogsbox1);
-        blogsboxs.push(blogsbox3);
-        blogsboxs.push(blogsbox4);
-        blogsboxs.push(blogsbox5);
-
-        //渲染banner
-        banners.forEach(function (value) {
-            $("#banner").append('<li class="slide" ><a href=info.html?detailInfoId=' + value.detailInfoId + ' ><img class="banner_img" src=' + value.bannerImageUrl + '><span class="imginfo">' + value.bannerName + '</span></a></li>');
-        });
-
-        toppic.forEach(function (value) {
-            $(".toppic").append('<li> <a href=info.html?detailInfoId=' + value.detailInfoId + ' > <i><img src=' + value.bannerImageUrl + '></i>' +
-                '<h2>' + value.bannerName + '</h2>' +
-                '<span>' + value.bannerLabel + '</span></a> </li>');
-        });
-
-        //特别推荐
-        hometitle.forEach(function (value, index) {
-            $(".hometitle_c").append('<li> <i><img src=' + value.bannerImageUrl + '></i>' +
-                '          <p>' + value.bannerName + ' <span><a href=info.html?detailInfoId=' + value.detailInfoId + '>阅读</a></span> </p>' +
-                '        </li>');
-        });
-
-        //推荐文章
-        $(".tjpic").append(' <i><img src=' + banner4.bannerImageUrl + '></i>\n' +
-            '        <p><a href=info.html?detailInfoId=' + banner4.detailInfoId + '>' + banner4.bannerName + '</a></p>');
-        sidenews.forEach(function (value, index) {
-            $(".sidenews").append('<li> <i><img src=' + value.bannerImageUrl + '></i>\n' +
-                '          <p><a href=info.html?detailInfoId=' + value.detailInfoId + '>' + value.bannerName + '</a></p>\n' +
-                '          <span>' + value.createDate + '</span> </li>');
-        });
-        //点击排行
-        $(".clickRank_c_t").append(' <i><img src=' + banner4.bannerImageUrl + '></i>\n' +
-            '        <p><a href=info.html?detailInfoId=' + banner4.detailInfoId + '>' + banner4.bannerName + '</a></p>');
-        sidenews.forEach(function (value, index) {
-            $(".clickRank_c").append('<li> <i><img src=' + value.bannerImageUrl + '></i>\n' +
-                '          <p><a href=info.html?detailInfoId=' + value.detailInfoId + '>' + value.bannerName + '</a></p>\n' +
-                '          <span>' + value.createDate + '</span> </li>');
-        });
-
-        //标签云
-        labelCloud.forEach(function (value) {
-            $(".cloud_c").append('<a href="javacript:void(0);">' + value.labelName + '</a>');
-        });
-
-        //友情链接
-        links.forEach(function (value) {
-            $(".links_c").append('<li><a href=' + value.linksUrl + ' target="_blank">' + value.linksName + '</a></li>');
-        });
-
-        //关注我们 么么哒！
-        var guanzhu = '<li class="sina"><a href=' + guanzhuData.sinaUrl + ' ><span>' + guanzhuData.sinaName + '</span>' + guanzhuData.sinaNickName + '</a></li>';
-        guanzhu += '<li class="tencent"><a href=' + guanzhuData.tencentUrl + ' ><span>' + guanzhuData.tencentName + '</span>' + guanzhuData.tencentNickName + '</a></li>';
-        guanzhu += '<li class="qq"><a href=' + guanzhuData.qqUrl + ' ><span>' + guanzhuData.qqName + '</span>' + guanzhuData.qqNickName + '</a></li>';
-        guanzhu += '<li class="email"><a href=' + guanzhuData.emailUrl + ' ><span>' + guanzhuData.emailName + '</span>' + guanzhuData.emailNickName + '</a></li>';
-        guanzhu += '<li class="wxgzh"><a href=' + guanzhuData.wxgzhUrl + ' ><span>' + guanzhuData.wxgzhName + '</span>' + guanzhuData.wxgzhNickName + '</a></li>';
-        guanzhu += '<li class="wx"><img src=' + guanzhuData.wxImageUrl + '></li>';
-        $(".guanzhu_c").append(guanzhu);
-
-        //内容页
-        blogsboxs.forEach(function (value) {
-
-            var temp = '<div class="blogs" data-scroll-reveal="enter bottom over 1s" >\n' +
-                '      <h3 class="blogtitle"><a href=info.html?detailInfoId='+value.blogInfoId+' >'+value.blogtitle+'</a></h3>\n' ;
-
-            if(value.blogpic1 || value.blogpic2 || value.blogpic3){
-               temp+='<span class="bplist"><a href=info.html?detailInfoId=' + value.blogInfoId + ' title="">';
+                    $(".blogsbox").append(temp);
+                });
             }
-
-            if(value.blogpic1) {
-                temp += '<span class="blogpic"><a href=info.html?detailInfoId=' + value.blogInfoId + ' title=""><img src=' + value.blogpic1 + ' alt=""></a></span>';
-            }
-            if(value.blogpic2) {
-                temp += '<span class="blogpic"><a href=info.html?detailInfoId=' + value.blogInfoId + ' title=""><img src=' + value.blogpic2 + ' alt=""></a></span>';
-            }
-            if(value.blogpic3) {
-                temp += '<span class="blogpic"><a href=info.html?detailInfoId=' + value.blogInfoId + ' title=""><img src=' + value.blogpic3 + ' alt=""></a></span>';
-            }
-
-            if(value.blogpic1 || value.blogpic2 || value.blogpic3){
-                temp+='</a></span>';
-            }
-
-            temp+='      <p class="blogtext">'+value.blogtext+'</p>\n' +
-                '      <div class="bloginfo">\n' +
-                '        <ul>\n' +
-                '          <li class="author"><a href="/">'+value.author+'</a></li>\n' +
-                '          <li class="lmname"><a href="/">'+value.lmname+'</a></li>\n' +
-                '          <li class="timer">'+value.time+'</li>\n' +
-                '          <li class="view"><span>'+value.view+'</span>已阅读</li>\n' +
-                '          <li class="like">'+value.like+'</li>\n' +
-                '        </ul>\n' +
-                '      </div>\n' +
-                '    </div>';
-
-            $(".blogsbox").append(temp);
         });
-
     });
 </script>
 </html>
