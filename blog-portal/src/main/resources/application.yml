@@ -7,7 +7,5 @@ server:
 
 eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     serviceUrl:
       defaultZone: ${blog-portal.service-url.defaultZone}

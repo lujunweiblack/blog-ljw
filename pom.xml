@@ -13,7 +13,7 @@
         <module>blog-common</module>
         <module>blog-gateway</module>
         <module>blog-portal</module>
-        <module>blog-service</module>
+        <module>blog-api</module>
     </modules>
 
     <properties>
@@ -50,6 +50,11 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -130,13 +135,13 @@
 
     <profiles>
         <profile>
-            <id>default</id>
+            <id>defaEnv</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <build>
                 <filters>
-                    <filter>../blog-config/default.properties</filter>
+                    <filter>../blog-config/defaEnv.properties</filter>
                 </filters>
                 <resources>
                     <resource>
@@ -150,10 +155,27 @@
             </build>
         </profile>
         <profile>
-            <id>testEnv</id>
+            <id>areaEnv</id>
             <build>
                 <filters>
-                    <filter>../blog-config/testEnv.properties</filter>
+                    <filter>../blog-config/areaEnv.properties</filter>
+                </filters>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>linedEnv</id>
+            <build>
+                <filters>
+                    <filter>../blog-config/linedEnv.properties</filter>
                 </filters>
                 <resources>
                     <resource>
