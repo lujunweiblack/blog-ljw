@@ -1,7 +1,8 @@
 package com.ljw.blog.portal.service;
 
-import com.ljw.blog.api.api.IndexApi;
+import com.ljw.blog.common.vo.IndexVo;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @Author: lujunwei
@@ -9,5 +10,9 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @Desc:
  */
 @FeignClient("blog-api")
-public interface IndexService extends IndexApi {
+public interface IndexService{
+
+    @GetMapping("index")
+    IndexVo fillIndex();
+
 }

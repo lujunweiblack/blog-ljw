@@ -12,6 +12,6 @@ import java.util.List;
  * @des:
  */
 public interface ArticleApi {
-    @GetMapping("/article)")
+    @GetMapping(value = "/article")
     List<BArticle> articleQuery(@RequestParam("article") BArticle article);
 }
