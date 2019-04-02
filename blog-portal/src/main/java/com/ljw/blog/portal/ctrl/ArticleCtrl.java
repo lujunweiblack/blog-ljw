@@ -16,13 +16,13 @@ import java.util.List;
  * @des:
  */
 @RestController
-@RequestMapping(value = "/article")
+@RequestMapping(value = "/portal")
 public class ArticleCtrl {
 
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/article",method = RequestMethod.GET)
     public List<BArticle> articleQuery(BArticle article) {
         return articleService.articleQuery(article);
     }

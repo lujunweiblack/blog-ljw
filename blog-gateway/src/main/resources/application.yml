@@ -1,17 +1,22 @@
 spring:
   application:
     name: ${blog-gateway.application.name}
-#  cloud:
-#    gateway:
-#      routes:
+  cloud:
+    gateway:
+      routes:
+      - id: ${blog-gateway.routes.id1}
+        uri: ${blog-gateway.routes.uri1}
+        predicates:
+          ${blog-gateway.routes.predicates1}
+      - id: ${blog-gateway.routes.id2}
+        uri: ${blog-gateway.routes.uri2}
+        predicates:
+          ${blog-gateway.routes.predicates2}
 #      - id: host_route
-#        uri: lb://manager
+#        uri: lb://manage
 #        predicates:
-#        - Path=/manager/**
-#      - id: host_route
-#        uri: http://127.0.0.1:8005
-#        predicates:
-#        - Path=/api/**
+#        - Path=/manage/**
+
 
 server:
   port: ${blog-gateway.server.port}

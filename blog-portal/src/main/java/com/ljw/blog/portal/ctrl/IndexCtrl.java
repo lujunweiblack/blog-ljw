@@ -26,9 +26,9 @@ public class IndexCtrl {
      * @time: 16:24 2019/3/30
      * @des: 用于根路径跳转访问
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/portal",method = RequestMethod.GET)
     public String jumpIndex() {
-        return "index.html";
+        return "index";
     }
 
     /**
@@ -38,7 +38,7 @@ public class IndexCtrl {
      * @time: 16:24 2019/3/30
      * @des: index.html页面的ajax请求, 获取填充页面的数据
      */
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/portal/index", method = RequestMethod.GET)
     @ResponseBody
     public String fillIndex() {
         return ResultBean.resultInit(ResultBean.SUCCESS, indexService.fillIndex());

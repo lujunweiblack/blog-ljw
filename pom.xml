@@ -13,12 +13,12 @@
         <module>blog-common</module>
         <module>blog-gateway</module>
         <module>blog-portal</module>
-        <module>blog-api</module>
+        <module>blog-manage</module>
     </modules>
 
     <properties>
         <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <spring-cloud.eureka.version>1.4.6.RELEASE</spring-cloud.eureka.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

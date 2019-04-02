@@ -1,0 +1,231 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页 - 傻不拉几的二哈 </title>
+    <meta name="keywords" content="个人博客,Jerry个人博客,个人博客模板,Jerry"/>
+    <meta name="description" content="Jerry个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/m.css" rel="stylesheet">
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.easyfader.min.js"></script>
+    <script src="/js/scrollReveal.js"></script>
+    <script src="/js/common.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/js/modernizr.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header class="header_c">
+</header>
+<article>
+    <!--banner begin-->
+    <div class="picsbox">
+        <div class="banner">
+            <div id="banner" class="fader">
+
+                <div class="fader_controls">
+                    <div class="page prev" data-target="prev">&lsaquo;</div>
+                    <div class="page next" data-target="next">&rsaquo;</div>
+                    <ul class="pager_list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--banner end-->
+        <div class="toppic">
+        </div>
+    </div>
+    <div class="blank"></div>
+    <!--blogsbox begin-->
+    <div class="blogsbox">
+
+    </div>
+    <!--blogsbox end-->
+    <div class="sidebar">
+        <div class="zhuanti">
+            <h2 class="hometitle">特别推荐</h2>
+            <ul class="hometitle_c">
+            </ul>
+        </div>
+        <div class="tuijian">
+            <h2 class="hometitle">推荐文章</h2>
+            <ul class="tjpic">
+
+            </ul>
+            <ul class="sidenews">
+            </ul>
+        </div>
+        <div class="tuijian">
+            <h2 class="hometitle">点击排行</h2>
+            <ul class="clickRank_c_t">
+            </ul>
+            <ul class="clickRank_c">
+            </ul>
+        </div>
+        <div class="cloud">
+            <h2 class="hometitle">标签云</h2>
+            <ul class="cloud_c">
+            </ul>
+        </div>
+        <div class="links">
+            <h2 class="hometitle">友情链接</h2>
+            <ul class="links_c">
+            </ul>
+        </div>
+        <div class="guanzhu" id="follow-us">
+            <h2 class="hometitle">关注我们 么么哒！</h2>
+            <ul class="guanzhu_c">
+            </ul>
+        </div>
+    </div>
+</article>
+<footer class="footer_c">
+
+</footer>
+<a href="#" class="cd-top">Top</a>
+</body>
+<script>
+    $(function () {
+        $(".header_c").load("/common/header.html");
+        $(".footer_c").load("/common/footer.html");
+
+        function timestampToDate(timestamp){
+            var d = new Date(timestamp);    //根据时间戳生成的时间对象
+            var date = (d.getFullYear()) + "-" +
+                (d.getMonth() + 1) + "-" +
+                (d.getDate()) + " ";
+                // (d.getHours()) + ":" +
+                // (d.getMinutes()) + ":" +
+                // (d.getSeconds())
+            ;
+            return date;
+        }
+
+        $.ajax({
+            url: "/portal/index",
+            type: "get",
+            async: false,
+            success: function (obj) {
+                var obj = $.parseJSON(obj);
+                var result = obj.result;
+                var bAbout = result.bAbout;
+                var bLinks = result.bLinks;
+                var bLabels = result.bLabels;
+                var bannerRightArticles = result.bannerRightArticles;
+                var bannerWheelArticles = result.bannerWheelArticles;
+                var clickRankArticles = result.clickRankArticles;
+                var ordinaryArticles = result.ordinaryArticles;
+                var recommendArticles = result.recommendArticles;
+                var specialRecoArticles = result.specialRecoArticles;
+
+                var infoPath ='/portal/info/';
+
+                //渲染banner
+                bannerWheelArticles.forEach(function (value) {
+                    $("#banner").append('<li class="slide" ><a href='+infoPath + value.articleId + ' ><img class="banner_img" src=' + value.browsePic01 + '><span class="imginfo">' + value.articleTitleName + '</span></a></li>');
+                });
+
+                bannerRightArticles.forEach(function (value) {
+                    $(".toppic").append('<li> <a href='+infoPath +  value.articleId + ' > <i><img src=' + value.browsePic01 + '></i>' +
+                        '<h2>' + value.articleTitleName + '</h2>' +
+                        '<span>' + value.categoryName + '</span></a> </li>');
+                });
+                //特别推荐
+                specialRecoArticles.forEach(function (value) {
+                    $(".hometitle_c").append('<li> <i><img src=' + value.browsePic01 + '></i>' +
+                        '          <p>' + value.articleTitleName + ' <span><a href='+infoPath +  value.articleId + '>阅读</a></span> </p>' +
+                        '        </li>');
+                });
+                //推荐文章
+                recommendArticles.forEach(function (value, index) {
+                    if (index === 0) {
+                        $(".tjpic").append(' <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '        <p><a href='+infoPath +  value.articleId + '>' + value.articleTitleName + '</a></p>');
+                    } else {
+                        $(".sidenews").append('<li> <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '          <p><a href='+infoPath +  value.articleId + '>' + value.articleTitleName + '</a></p>\n' +
+                            '          <span>' + timestampToDate(value.publishDate) + '</span> </li>');
+                    }
+                });
+
+                //点击排行
+                clickRankArticles.forEach(function (value, index) {
+                    if (index === 0) {
+                        $(".clickRank_c_t").append(' <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '        <p><a href='+infoPath +  value.articleId + '>' + value.articleTitleName + '</a></p>');
+                    } else {
+                        $(".clickRank_c").append('<li> <i><img src=' + value.browsePic01 + '></i>\n' +
+                            '          <p><a href='+infoPath +  value.articleId + '>' + value.articleTitleName + '</a></p>\n' +
+                            '          <span>' + timestampToDate(value.publishDate) + '</span> </li>');
+                    }
+
+                });
+
+                //标签云
+                bLabels.forEach(function (value) {
+                    $(".cloud_c").append('<a href="javacript:void(0);">' + value.labelName + '</a>');
+                });
+
+                //友情链接
+                bLinks.forEach(function (value) {
+                    $(".links_c").append('<li><a href=' + value.linkUrl + ' target="_blank">' + value.linkName + '</a></li>');
+                });
+
+                //关注我们 么么哒！
+                var guanzhu = '<li class="sina"><a href=' + bAbout.sinaUrl + ' ><span>新浪</span>' + bAbout.sinaName + '</a></li>';
+                guanzhu += '<li class="tencent"><a href=' + bAbout.tencentUrl + ' ><span>腾讯</span>' + bAbout.tencentName + '</a></li>';
+                guanzhu += '<li class="qq"><a href=' + bAbout.qqUrl + ' ><span>QQ</span>' + bAbout.qqName + '</a></li>';
+                guanzhu += '<li class="email"><a href=' + bAbout.emailUrl + ' ><span>邮箱</span>' + bAbout.emailName + '</a></li>';
+                guanzhu += '<li class="wxgzh"><a href=javascript:; ><span>微信</span>' + bAbout.wxName + '</a></li>';
+                guanzhu += '<li class="wx"><img src=' + bAbout.wxImgUrl + '></li>';
+                $(".guanzhu_c").append(guanzhu);
+
+                //内容页
+                ordinaryArticles.forEach(function (value) {
+
+                    var temp = '<div class="blogs" data-scroll-reveal="enter bottom over 1s" >\n' +
+                        '      <h3 class="blogtitle"><a href='+infoPath +  value.articleId + ' >' + value.articleTitleName + '</a></h3>\n';
+
+                    if (value.browsePic01 || value.browsePic02 || value.browsePic03) {
+                        temp += '<span class="bplist"><a href='+infoPath +  value.articleId + ' title="">';
+                    }
+
+                    if (value.browsePic01) {
+                        temp += '<span class="blogpic"><a href='+infoPath +  value.articleId + ' title=""><img src=' + value.browsePic01 + ' alt=""></a></span>';
+                    }
+                    if (value.browsePic02) {
+                        temp += '<span class="blogpic"><a href='+infoPath +  value.articleId + ' title=""><img src=' + value.browsePic02 + ' alt=""></a></span>';
+                    }
+                    if (value.browsePic03) {
+                        temp += '<span class="blogpic"><a href='+infoPath +  value.articleId + ' title=""><img src=' + value.browsePic03 + ' alt=""></a></span>';
+                    }
+
+                    if (value.browsePic01 || value.browsePic02 || value.browsePic03) {
+                        temp += '</a></span>';
+                    }
+
+                    temp += '      <p class="blogtext">' + value.articleIntroduction + '</p>\n' +
+                        '      <div class="bloginfo">\n' +
+                        '        <ul>\n' +
+                        '          <li class="author"><a href="/">' + value.authorName + '</a></li>\n' +
+                        '          <li class="lmname"><a href="/">' + value.categoryName + '</a></li>\n' +
+                        '          <li class="timer">' + timestampToDate(value.publishDate) + '</li>\n' +
+                        '          <li class="view"><span>' + 0 + '</span>已阅读</li>\n' +
+                        '          <li class="like">' + 0 + '</li>\n' +
+                        '        </ul>\n' +
+                        '      </div>\n' +
+                        '    </div>';
+
+                    $(".blogsbox").append(temp);
+                });
+            }
+        });
+    });
+</script>
+</html>
+
