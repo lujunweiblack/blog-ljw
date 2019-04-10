@@ -3,17 +3,15 @@ package com.ljw.blog.portal.ctrl;
 import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.portal.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: lujunwei
  * @time: 9:54 2019/3/21
  * @des:
  */
-@Controller
+@RestController
+@CrossOrigin
 public class IndexCtrl {
 
     @Autowired
@@ -26,7 +24,7 @@ public class IndexCtrl {
      * @time: 16:24 2019/3/30
      * @des: 用于根路径跳转访问
      */
-    @RequestMapping(value = "/portal",method = RequestMethod.GET)
+    @RequestMapping(value = "/",method = RequestMethod.GET)
     public String jumpIndex() {
         return "index";
     }
@@ -44,5 +42,8 @@ public class IndexCtrl {
         return ResultBean.resultInit(ResultBean.SUCCESS, indexService.fillIndex());
     }
 
+    public static void main(String[] args) {
+        System.out.println("".equals(null));
+    }
 
 }

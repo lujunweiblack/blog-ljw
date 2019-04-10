@@ -5,18 +5,6 @@ spring:
     url: ${blog-portal.datasource.url}
     username: ${blog-portal.datasource.username}
     password: ${blog-portal.datasource.password}
-  thymeleaf:
-    cache: false
-    prefix: classpath:/portal/
-    suffix: .html
-    encoding: UTF-8
-    mode: HTML5
-  resources:
-    chain:
-      strategy:
-        content:
-          enabled: true
-          paths: /**
 
 mybatis:
   type-aliases-package: ${blog-portal.mybatis.type-aliases-package}

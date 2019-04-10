@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+//@EnableFeignClients
 @MapperScan("com.ljw.blog.portal.mapper")
 public class PortalApplication {
     public static void main(String[] args){
