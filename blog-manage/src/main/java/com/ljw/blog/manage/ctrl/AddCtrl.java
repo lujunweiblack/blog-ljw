@@ -2,9 +2,7 @@ package com.ljw.blog.manage.ctrl;
 
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: lujunwei
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AddCtrl {
 
     @PostMapping("/save")
-    public String save(BArticle bArticle){
+    public String save(@RequestBody BArticle bArticle){
         System.out.println(bArticle);
         return ResultBean.resultInit(ResultBean.SUCCESS);
     }
