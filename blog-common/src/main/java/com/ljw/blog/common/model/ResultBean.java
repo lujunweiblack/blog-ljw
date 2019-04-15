@@ -24,6 +24,11 @@ public class ResultBean implements Serializable {
     private final static String JWT_TOKEN = "jwtToken";
 
 
+    public static String resultInit(String code) {
+        Map<String, Object> res = new HashMap<>();
+        res.put(CODE, code);
+        return JSONObject.toJSONString(res);
+    }
     public static String resultInit(String code, String msg) {
         Map<String, Object> res = new HashMap<>();
         res.put(MSG, msg);

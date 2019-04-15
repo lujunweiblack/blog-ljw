@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ${blog-manage.application.name}
+  datasource:
+    url: ${blog-manage.datasource.url}
+    username: ${blog-manage.datasource.username}
+    password: ${blog-manage.datasource.password}
+
+mybatis:
+  type-aliases-package: ${blog-manage.mybatis.type-aliases-package}
+  #mapperLocations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: ${blog-manage.server.port}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${blog-manage.service-url.defaultZone}
+
+
