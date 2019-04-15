@@ -14,14 +14,14 @@ public class BArticle {
     private String articleIntroduction;
     private Integer articleState;
     private Integer articleType;
-    private String browsePic01;
-    private String browsePic02;
-    private String browsePic03;
     private int authorId;
     private String authorName;
     private int categoryId;
     private String categoryName;
     private Date publishDate;
+    private String backupField01;
+    private String backupField02;
+    private String backupField03;
     private Date createDate;
     private Date updateDate;
 }
