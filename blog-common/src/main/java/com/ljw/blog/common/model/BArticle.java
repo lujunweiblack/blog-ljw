@@ -6,22 +6,21 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Data
-public class BArticle {
+public class BArticle{
     @Id
-    private long articleId;
+    private Integer articleId;
     private String articleTitleName;
     private String articleDetailUrl;
     private String articleIntroduction;
     private Integer articleState;
     private Integer articleType;
-    private int authorId;
+    private Integer authorId;
     private String authorName;
-    private int categoryId;
+    private Integer categoryId;
     private String categoryName;
     private Date publishDate;
-    private String backupField01;
-    private String backupField02;
-    private String backupField03;
+    private String backupFieldOne;
+    private String backupFieldTwo;
     private Date createDate;
     private Date updateDate;
 }

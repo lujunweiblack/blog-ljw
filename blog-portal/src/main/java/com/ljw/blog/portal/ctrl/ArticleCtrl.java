@@ -1,13 +1,12 @@
 package com.ljw.blog.portal.ctrl;
 
 
+import com.ljw.blog.common.inface.ArticleApi;
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.common.vo.ArticlesVo;
-import com.ljw.blog.portal.service.ArticleBrowseService;
-import com.ljw.blog.portal.service.ArticleLikeService;
-import com.ljw.blog.portal.service.ArticleService;
-import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
+import com.ljw.blog.portal.api.ArticleBrowseApi;
+import com.ljw.blog.portal.api.ArticleLikeApi;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,21 +26,28 @@ import java.util.List;
 public class ArticleCtrl {
 
     @Autowired
-    private ArticleService articleService;
+    private ArticleApi articleApi;
     @Autowired
-    private ArticleLikeService articleLikeService;
+    private ArticleLikeApi articleLikeApi;
     @Autowired
-    private ArticleBrowseService articleBrowseService;
+    private ArticleBrowseApi articleBrowseApi;
 
+    /**
+     * @author: lujunwei
+     * @param: [article]
+     * @return: java.lang.String
+     * @time: 12:58 2019/4/17
+     * @des: This is a function
+     */
     @RequestMapping(value = "/article", method = RequestMethod.GET)
     public String articleQuery(BArticle article) {
-        List<BArticle> bArticles = articleService.articleQuery(article);
+        List<BArticle> bArticles = articleApi.articleQuery(article);
         List<ArticlesVo> articlesVos = new ArrayList<>();
         for (BArticle b : bArticles) {
             ArticlesVo articlesVo = new ArticlesVo();
             BeanUtils.copyProperties(b, articlesVo);
-            articlesVo.setArticleLikeCount(articleLikeService.articleLikeQueryCount(b.getArticleId()));
-            articlesVo.setArticleBrowseCount(articleBrowseService.articleBrowseQueryCount(b.getArticleId()));
+            articlesVo.setArticleLikeCount(articleLikeApi.articleLikeQueryCount(b.getArticleId()));
+            articlesVo.setArticleBrowseCount(articleBrowseApi.articleBrowseQueryCount(b.getArticleId()));
             articlesVos.add(articlesVo);
         }
         return ResultBean.resultInit(ResultBean.SUCCESS, articlesVos);

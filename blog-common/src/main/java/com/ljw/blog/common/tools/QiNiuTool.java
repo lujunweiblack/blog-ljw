@@ -24,6 +24,13 @@ public class QiNiuTool {
     public static final String BUCKET_PREFIX_MD = "md/";
     public static final String BUCKET_SUFFIX_MD = ".md";
 
+    /**
+     * @author: lujunwei
+     * @param: fileName,bucket,content
+     * @return: String
+     * @time: 11:21 2019/4/17
+     * @des: This is a function
+     */
     public static String inputStreamUpload(String fileName, String bucket, String content) {
         //构造一个带指定Zone对象的配置类
         Configuration cfg = new Configuration(Zone.zone0());

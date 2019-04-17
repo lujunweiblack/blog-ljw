@@ -2,17 +2,27 @@ spring:
   application:
     name: ${blog-portal.application.name}
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${blog-portal.datasource.url}
     username: ${blog-portal.datasource.username}
     password: ${blog-portal.datasource.password}
 
 mybatis:
   type-aliases-package: ${blog-portal.mybatis.type-aliases-package}
-  #mapperLocations: classpath:mapper/*.xml
+  mapperLocations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
 server:
   port: ${blog-portal.server.port}
+
+logging:
+  level:
+    com:
+      ljw:
+        blog:
+          portal:
+            mapper: DEBUG
 
 eureka:
   client:

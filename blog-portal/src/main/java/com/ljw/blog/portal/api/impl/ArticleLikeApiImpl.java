@@ -1,7 +1,7 @@
-package com.ljw.blog.portal.service.impl;
+package com.ljw.blog.portal.api.impl;
 
 import com.ljw.blog.portal.mapper.ArticleLikeMapper;
-import com.ljw.blog.portal.service.ArticleLikeService;
+import com.ljw.blog.portal.api.ArticleLikeApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @des:
  */
 @Service
-public class ArticleLikeServiceImpl implements ArticleLikeService {
+public class ArticleLikeApiImpl implements ArticleLikeApi {
 
     @Autowired
     private ArticleLikeMapper articleLikeMapper;

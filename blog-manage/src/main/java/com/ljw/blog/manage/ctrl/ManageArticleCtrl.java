@@ -1,0 +1,61 @@
+package com.ljw.blog.manage.ctrl;
+
+import com.ljw.blog.common.model.BArticle;
+import com.ljw.blog.common.model.ResultBean;
+import com.ljw.blog.manage.api.ArticleFeignClientApi;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
+
+/**
+ * @author: lujunwei
+ * @time: 17:01 2019/4/17
+ * @des:
+ */
+@RestController
+@RequestMapping(value = "/manage/article")
+public class ManageArticleCtrl {
+
+    @Autowired
+    private ArticleFeignClientApi articleFeignClientApi;
+
+    /**
+     * @author: lujunwei
+     * @param: [bArticle]
+     * @return: java.lang.String
+     * @time: 17:11 2019/4/17
+     * @des: This is a function
+     */
+    @PostMapping("/upAndDown")
+    public String upAndDown(@RequestBody BArticle bArticle) {
+        if (bArticle.getArticleState() == 0) {
+            bArticle.setArticleState(1);
+        } else if (bArticle.getArticleState() == 1) {
+            bArticle.setArticleState(0);
+        } else {
+            bArticle.setArticleState(0);
+        }
+        bArticle.setUpdateDate(new Date());
+        articleFeignClientApi.articleInsertByPrimaryKey(bArticle);
+        return ResultBean.resultInit(ResultBean.SUCCESS);
+    }
+
+    /**
+     * @author: lujunwei
+     * @param: [bArticle]
+     * @return: java.lang.String
+     * @time: 17:11 2019/4/17
+     * @des: This is a function
+     */
+    @PostMapping("/markDel")
+    public String markDel(@RequestBody BArticle bArticle) {
+        bArticle.setArticleState(3);
+        articleFeignClientApi.articleInsertByPrimaryKey(bArticle);
+        bArticle.setUpdateDate(new Date());
+        return ResultBean.resultInit(ResultBean.SUCCESS);
+    }
+}

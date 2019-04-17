@@ -1,9 +1,10 @@
 package com.ljw.blog.manage.ctrl;
+import java.util.Date;
 
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.common.tools.QiNiuTool;
-import com.ljw.blog.manage.service.ArticleService;
+import com.ljw.blog.manage.api.ArticleFeignClientApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import static com.ljw.blog.common.tools.QiNiuTool.*;
@@ -18,23 +19,39 @@ import static com.ljw.blog.common.tools.QiNiuTool.*;
 public class AddCtrl {
 
     @Autowired
-    private ArticleService articleService;
+    private ArticleFeignClientApi articleFeignClientApi;
 
+
+    /**
+     * @author: lujunwei
+     * @param: [bArticle]
+     * @return: java.lang.String
+     * @time: 11:21 2019/4/17
+     * @des: This is a function
+     */
     @PostMapping("/save")
     public String save(@RequestBody BArticle bArticle) {
 
-        //将文章的基本信息插入到数据库
-
+        //获取递增主键
+        int articleId = articleFeignClientApi.articleiNextId();
         //上传.md的文件到七牛云
-        String fileName = BLOG_ARTICLE + bArticle.getArticleId() + BUCKET_SUFFIX_MD;
-        QiNiuTool.inputStreamUpload(fileName, BLOG_STATIC, bArticle.getBackupField01());
+        String fileName = BUCKET_PREFIX_MD + articleId + BUCKET_SUFFIX_MD;
+        QiNiuTool.inputStreamUpload(fileName, BLOG_ARTICLE, bArticle.getBackupFieldOne());
+        //临时设置基本数据
+        Date sysDate = new Date();
+        bArticle.setArticleId(articleId);
+        bArticle.setArticleDetailUrl(fileName);
+        bArticle.setArticleType(1);
+        bArticle.setAuthorId(20190016);
+        bArticle.setAuthorName("lujunwei");
+        bArticle.setCategoryId(10000913);
+        bArticle.setCategoryName("陆军委组织");
+        bArticle.setCreateDate(sysDate);
+        bArticle.setUpdateDate(sysDate);
+
+        //将文章的基本信息插入到数据库
+        articleFeignClientApi.articleInsertByPrimaryKey(bArticle);
         return ResultBean.resultInit(ResultBean.SUCCESS);
     }
 
-    @GetMapping("/aa")
-    public BArticle dd(){
-        BArticle article = new BArticle();
-        article.setArticleType(1);
-       return articleService.articleQuery(article).get(0);
-    }
 }

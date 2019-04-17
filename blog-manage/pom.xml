@@ -41,6 +41,14 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.netflix.feign/feign-httpclient -->
+        <!--网上说使用Apache HttpClient替换Feign原生httpclient 但是我在客户端加上这局依赖就解决了 ????-->
+        <!--https://www.cnblogs.com/technologykai/p/9766545.html-->
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+            <version>8.15.1</version>
+        </dependency>
     </dependencies>
     <!--<build>-->
         <!--<plugins>-->

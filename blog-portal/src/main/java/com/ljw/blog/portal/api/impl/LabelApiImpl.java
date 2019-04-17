@@ -1,8 +1,8 @@
-package com.ljw.blog.portal.service.impl;
+package com.ljw.blog.portal.api.impl;
 
 import com.ljw.blog.common.model.BLabel;
 import com.ljw.blog.portal.mapper.LabelMapper;
-import com.ljw.blog.portal.service.LabelService;
+import com.ljw.blog.portal.api.LabelApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @Desc:
  */
 @RestController
-public class LabelServiceImpl implements LabelService {
+public class LabelApiImpl implements LabelApi {
 
     @Autowired
     private LabelMapper labelMapper;

@@ -11,9 +11,11 @@ import java.util.Date;
  */
 @Data
 public class ArticlesVo {
-    private long articleId;
+    private Integer articleId;
     private String articleTitleName;
     private String articleIntroduction;
+    private Integer articleState;
+    private Integer articleType;
     private String authorName;
     private String categoryName;
     private Date publishDate;

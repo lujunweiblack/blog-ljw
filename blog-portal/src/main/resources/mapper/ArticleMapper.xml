@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljw.blog.portal.mapper.ArticleMapper">
+    <insert id="articleiNextId" useGeneratedKeys="true" keyProperty="articleId" >
+        insert into b_article(article_id) values(null)
+    </insert>
+</mapper>

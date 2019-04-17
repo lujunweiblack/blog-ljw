@@ -2,18 +2,22 @@ spring:
   application:
     name: ${blog-manage.application.name}
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${blog-manage.datasource.url}
     username: ${blog-manage.datasource.username}
     password: ${blog-manage.datasource.password}
 
 mybatis:
   type-aliases-package: ${blog-manage.mybatis.type-aliases-package}
-  #mapperLocations: classpath:mapper/*.xml
+  mapperLocations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
 server:
   port: ${blog-manage.server.port}
-
+#这一句也不需要加, 也可以完成调用
+#feign:
+#  httpclient:
+#    enabled: true
 eureka:
   client:
     serviceUrl:
