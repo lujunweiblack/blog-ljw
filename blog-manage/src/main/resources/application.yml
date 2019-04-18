@@ -14,6 +14,13 @@ mybatis:
     map-underscore-to-camel-case: true
 server:
   port: ${blog-manage.server.port}
+logging:
+  level:
+    com:
+      ljw:
+        blog:
+          manage:
+            mapper: DEBUG
 #这一句也不需要加, 也可以完成调用
 #feign:
 #  httpclient:

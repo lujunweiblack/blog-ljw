@@ -1,12 +1,10 @@
 package com.ljw.blog.portal.api.impl;
 
 import com.ljw.blog.common.model.BArticle;
-import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.portal.mapper.ArticleMapper;
 import com.ljw.blog.common.inface.ArticleApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 

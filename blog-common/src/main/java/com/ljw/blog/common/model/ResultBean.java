@@ -43,6 +43,14 @@ public class ResultBean implements Serializable {
         return JSONObject.toJSONString(res);
     }
 
+    public static String resultInit(String code,String msg,Object result) {
+        Map<String, Object> res = new HashMap<>();
+        res.put(RESULT, result);
+        res.put(MSG, msg);
+        res.put(CODE, code);
+        return JSONObject.toJSONString(res);
+    }
+
     public static String resultInit(String code, String msg,String jwtToken) {
         Map<String, Object> res = new HashMap<>();
         res.put(JWT_TOKEN, jwtToken);

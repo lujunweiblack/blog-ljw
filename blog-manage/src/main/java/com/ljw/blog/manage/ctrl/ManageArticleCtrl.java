@@ -34,12 +34,15 @@ public class ManageArticleCtrl {
     public String upAndDown(@RequestBody BArticle bArticle) {
         if (bArticle.getArticleState() == 0) {
             bArticle.setArticleState(1);
+            bArticle.setPublishDate(new Date());
         } else if (bArticle.getArticleState() == 1) {
             bArticle.setArticleState(0);
+            bArticle.setPublishDate(null);
         } else {
             bArticle.setArticleState(0);
+            bArticle.setPublishDate(null);
         }
-        bArticle.setUpdateDate(new Date());
+
         articleFeignClientApi.articleInsertByPrimaryKey(bArticle);
         return ResultBean.resultInit(ResultBean.SUCCESS);
     }
@@ -53,7 +56,7 @@ public class ManageArticleCtrl {
      */
     @PostMapping("/markDel")
     public String markDel(@RequestBody BArticle bArticle) {
-        bArticle.setArticleState(3);
+        bArticle.setArticleState(2);
         articleFeignClientApi.articleInsertByPrimaryKey(bArticle);
         bArticle.setUpdateDate(new Date());
         return ResultBean.resultInit(ResultBean.SUCCESS);
