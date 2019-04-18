@@ -16,6 +16,7 @@ import static com.ljw.blog.common.tools.QiNiuTool.*;
  */
 @RestController
 @RequestMapping(value = "/manage/add")
+@CrossOrigin
 public class AddCtrl {
 
     @Autowired

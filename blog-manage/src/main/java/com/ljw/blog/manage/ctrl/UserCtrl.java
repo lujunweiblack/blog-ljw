@@ -10,10 +10,7 @@ import com.ljw.blog.manage.api.UserApi;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +25,7 @@ import static com.ljw.blog.common.constant.SysRoleCon.ROLE_USER;
  */
 @RestController
 @RequestMapping("/manage/user")
+@CrossOrigin
 public class UserCtrl {
 
     @Autowired
@@ -47,11 +45,11 @@ public class UserCtrl {
     public String sysUserLogin(@RequestBody SysUser sysUser) {
         SysUser querySysUser = userApi.findUserByUser(sysUser);
         if (querySysUser == null) {
-            return ResultBean.resultInit(ResultBean.SUCCESS, "不存在的用户");
+            return ResultBean.resultInit(ResultBean.FAIL, "不存在的用户");
         }
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         if (!bCryptPasswordEncoder.matches(sysUser.getPassWord(),querySysUser.getPassWord())) {
-            return ResultBean.resultInit(ResultBean.SUCCESS, "用户名或密码错误");
+            return ResultBean.resultInit(ResultBean.FAIL, "用户名或密码错误");
         }
 
         List<SysRole> rolesByUser = roleApi.findRoleByUserId(querySysUser.getId());
