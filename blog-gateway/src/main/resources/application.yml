@@ -3,6 +3,9 @@ spring:
     name: ${blog-gateway.application.name}
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
       - id: ${blog-gateway.routes.id1}
         uri: ${blog-gateway.routes.uri1}
@@ -22,6 +25,8 @@ server:
   port: ${blog-gateway.server.port}
 
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: ${blog-gateway.service-url.defaultZone}

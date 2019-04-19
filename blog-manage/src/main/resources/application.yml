@@ -26,6 +26,9 @@ logging:
 #  httpclient:
 #    enabled: true
 eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${blog-manage.instance.id}
   client:
     serviceUrl:
       defaultZone: ${blog-manage.service-url.defaultZone}
