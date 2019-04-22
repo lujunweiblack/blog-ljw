@@ -25,8 +25,8 @@ server:
   port: ${blog-gateway.server.port}
 
 eureka:
-  instance:
-    prefer-ip-address: true
+#  instance:
+#    prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: ${blog-gateway.service-url.defaultZone}

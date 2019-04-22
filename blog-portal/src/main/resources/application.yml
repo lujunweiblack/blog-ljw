@@ -25,9 +25,9 @@ logging:
             mapper: DEBUG
 
 eureka:
-  instance:
-    prefer-ip-address: true
-    instance-id: ${blog-portal.instance.id}
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${blog-portal.instance.id}
   client:
     serviceUrl:
       defaultZone: ${blog-portal.service-url.defaultZone}
