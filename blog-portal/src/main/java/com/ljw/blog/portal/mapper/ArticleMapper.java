@@ -13,5 +13,8 @@ public interface ArticleMapper extends Mapper<BArticle> {
     @SelectProvider(type = ArticleMapperArticleQueryProvider.class, method = "articleQuery")
     List<BArticle> articleQuery(BArticle article);
 
-    int articleiNextId(BArticle bArticle);
+    Integer articleiNextId(BArticle bArticle);
+
+    @SelectProvider(type = ArticleMapperArticleQueryProvider.class, method = "articleiAlreadyNextId")
+    Integer articleiAlreadyNextId(BArticle bArticle);
 }

@@ -1,6 +1,8 @@
 package com.ljw.blog.portal.mapperSqlProvider;
 
 import com.ljw.blog.common.model.BArticle;
+import com.ljw.blog.common.tools.DataTools;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author: lujunwei
@@ -18,11 +20,30 @@ public class ArticleMapperArticleQueryProvider {
      */
     public String articleQuery(BArticle bArticle) {
         StringBuilder sql = new StringBuilder();
-        sql.append("select * from b_article t where t.article_type = #{articleType} ");
-        if (bArticle.getArticleState() != null && !"".equals(bArticle.getArticleState())) {
+        sql.append("select * from b_article t where 1=1 ");
+        if (DataTools.dataIsNotNullAndEmpty(bArticle.getArticleState())) {
             sql.append(" and t.article_state = #{articleState} ");
         }
+        if (DataTools.dataIsNotNullAndEmpty(bArticle.getArticleType())) {
+            sql.append(" and t.article_type = #{articleType} ");
+        }
+        if (DataTools.dataIsNotNullAndEmpty(bArticle.getArticleId())) {
+            sql.append(" and t.article_id = #{articleId} ");
+        }
         sql.append("order by t.article_id desc");
+        return sql.toString();
+    }
+
+    /**
+     * @author: lujunwei
+     * @param:
+     * @return:
+     * @time: 14:01 2019/4/18
+     * @des: This is a function
+     */
+    public String articleiAlreadyNextId(BArticle bArticle) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("select t.article_id from b_article t where 1=1 and t.create_date is null");
         return sql.toString();
     }
 }
