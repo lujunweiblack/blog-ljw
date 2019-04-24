@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-04-19 15:47:07
+Date: 2019-04-24 17:56:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -145,6 +145,8 @@ INSERT INTO `sys_user` VALUES ('20190013', 'zhangsan', '张三', '$2a$10$/Ybr7IU
 INSERT INTO `sys_user` VALUES ('20190014', 'lisi', '李四', '$2a$10$/Ybr7IULud2Ofn.tYIvdOexvCNaDknWCxhMHF8vTOuXPuTTDNoe.G', '31', '男', '15712309087', 'lisi@51.com', '上海市上海市浦东新区酣梦路564号', null, '0');
 INSERT INTO `sys_user` VALUES ('20190015', 'lihuan', '李欢', '$2a$10$/Ybr7IULud2Ofn.tYIvdOexvCNaDknWCxhMHF8vTOuXPuTTDNoe.G', '28', '女', '13578672281', 'lihuan@qq.com', '江苏省南京市华天小区源昌路6栋330', null, '0');
 INSERT INTO `sys_user` VALUES ('20190016', 'lujunwei', '陆军委', '$2a$10$clklmY5liWjyZ3eGpWrXyeo7yOOpl0JY5eqvrArpjzIK4Qa2Sev9e', '25', '男', '15295159035', 'lujunwei_black@163.com', '上海上海市嘉定区秋竹路119弄904室', '', '0');
+INSERT INTO `sys_user` VALUES ('20190017', 'jiangkun', '姜昆', '$2a$10$clklmY5liWjyZ3eGpWrXyeo7yOOpl0JY5eqvrArpjzIK4Qa2Sev9e', '31', '男', '188*****2315', 'jktree@163.com', '上海上海市嘉定区秋竹路119弄904室', null, '0');
+INSERT INTO `sys_user` VALUES ('20190018', 'wangxiufen', '王秀芬', '$2a$10$clklmY5liWjyZ3eGpWrXyeo7yOOpl0JY5eqvrArpjzIK4Qa2Sev9e', '27', '女', '18627945022', '18627945022@163.com', '上海上海市嘉定区秋竹路119弄904室', null, '0');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -163,3 +165,4 @@ CREATE TABLE `sys_user_role` (
 INSERT INTO `sys_user_role` VALUES ('68906', '20190013', '2205');
 INSERT INTO `sys_user_role` VALUES ('68907', '20190013', '2206');
 INSERT INTO `sys_user_role` VALUES ('68908', '20190016', '2207');
+INSERT INTO `sys_user_role` VALUES ('68909', '20190017', '2207');
