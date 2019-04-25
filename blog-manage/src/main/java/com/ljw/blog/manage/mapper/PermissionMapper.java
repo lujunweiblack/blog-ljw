@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface PermissionMapper {
 
-    @Select("select t3.* from sys_permission t1, sys_role_permission t2,sys_role t3 where t1.id = t2.sys_permission_id and t3.id = t2.sys_role_id and t1.url = #{requestUrl}")
+    @Select("SELECT T3.* FROM sys_permission T1, SYS_ROLE_PERMISSION T2,SYS_ROLE T3 WHERE T1.ID = T2.SYS_PERMISSION_ID AND T3.ID = T2.SYS_ROLE_ID AND T1.URL = #{requestUrl}")
     List<SysRole> getPermByPermCode(String requestUrl);
 }

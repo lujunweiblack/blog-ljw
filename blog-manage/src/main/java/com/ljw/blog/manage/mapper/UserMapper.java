@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface UserMapper {
 
-    @Select("select * from sys_user where user_code = #{userName}")
+    @Select("SELECT * FROM sys_user WHERE USER_CODE = #{userName}")
     SysUser findUserByUserName(String userName);
 
-    @Select("select * from sys_user where user_code = #{userName}")
+    @Select("SELECT * FROM sys_user WHERE USER_CODE = #{userName}")
     SysUser findUserByUser(SysUser sysUser);
 }
