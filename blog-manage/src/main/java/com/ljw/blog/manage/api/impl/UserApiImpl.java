@@ -6,6 +6,8 @@ import com.ljw.blog.manage.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author: lujunwei
  * @time: 15:24 2019/1/16
@@ -26,5 +28,10 @@ public class UserApiImpl implements UserApi {
     @Override
     public SysUser findUserByUser(SysUser sysUser) {
         return userMapper.findUserByUser(sysUser);
+    }
+
+    @Override
+    public List<SysUser> findUserByRoleId() {
+        return userMapper.findUserByRoleId();
     }
 }

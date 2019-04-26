@@ -1,12 +1,19 @@
 package com.ljw.blog.manage.scheduler.JobTask;
 
+import com.ljw.blog.common.model.SysUser;
+import com.ljw.blog.common.tools.DataTools;
+import com.ljw.blog.common.tools.SendMail;
 import com.ljw.blog.common.vo.JDBCVo;
+import com.ljw.blog.common.vo.MailInfo;
+import com.ljw.blog.manage.api.UserApi;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: lujunwei
@@ -16,6 +23,10 @@ import java.util.Date;
 @Slf4j
 @Component
 public class DataBaseBackup {
+
+    @Autowired
+    private UserApi userApi;
+
 
     /**
      * Java代码实现MySQL数据库导出
@@ -54,13 +65,13 @@ public class DataBaseBackup {
             InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
             bufferedReader = new BufferedReader(inputStreamReader);
             String line;
-            log.info("=============================== Start backing up the database :"+jdbcVo.getDataBase()+" ==============================");
+            log.info("=============================== Start backing up the database :" + jdbcVo.getDataBase() + " ==============================");
             while ((line = bufferedReader.readLine()) != null) {
                 printWriter.println(line);
                 log.info(line);
 
             }
-            log.info("=============================== End backup database :"+jdbcVo.getDataBase()+"==============================");
+            log.info("=============================== End backup database :" + jdbcVo.getDataBase() + "==============================");
             printWriter.flush();
             if (process.waitFor() == 0) {//0 表示线程正常终止。
                 return true;
@@ -122,6 +133,12 @@ public class DataBaseBackup {
             jdbcVo.setDataBase("blog-sbljdeh");
             if (exportDatabaseTool(jdbcVo)) {
                 log.info("=============== " + jdbcVo.getFileName() + " 数据库备份成功 ===============");
+                List<SysUser> sendUsers = userApi.findUserByRoleId();
+                MailInfo mailInfo = new MailInfo();
+                DataTools.parsingInputFormat(sendUsers, mailInfo);
+                mailInfo.setSubject("定时任务自动备份数据库邮件通知");
+                mailInfo.setContent("系统管理员\n    您好！您的设定的 <定时任务自动备份数据库程序> 已经执行完毕，且已备份成功。\n 服务器备份路径: \n   /usr/share/nginx/html/backupDatabase/rbac_seurity_"+sysDate+".sql"+"\n   /usr/share/nginx/html/backupDatabase/blog-sbljdeh_"+sysDate+".sql");
+                SendMail.send163(mailInfo);
             } else {
                 throw new InterruptedException();
             }
