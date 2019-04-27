@@ -137,7 +137,7 @@ public class DataBaseBackup {
                 MailInfo mailInfo = new MailInfo();
                 DataTools.parsingInputFormat(sendUsers, mailInfo);
                 mailInfo.setSubject("定时任务自动备份数据库邮件通知");
-                mailInfo.setContent("系统管理员\n    您好！您的设定的 <定时任务自动备份数据库程序> 已经执行完毕，且已备份成功。\n 服务器备份路径: \n   /usr/share/nginx/html/backupDatabase/rbac_seurity_"+sysDate+".sql"+"\n   /usr/share/nginx/html/backupDatabase/blog-sbljdeh_"+sysDate+".sql");
+                mailInfo.setContent("系统管理员\n    您好！您设定的 <定时任务自动备份数据库程序> 已经执行完毕，且已备份成功。\n 服务器备份路径: \n   /usr/share/nginx/html/backupDatabase/rbac_seurity_"+sysDate+".sql"+"\n   /usr/share/nginx/html/backupDatabase/blog-sbljdeh_"+sysDate+".sql");
                 SendMail.send163(mailInfo);
             } else {
                 throw new InterruptedException();
