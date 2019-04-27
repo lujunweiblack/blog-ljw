@@ -41,6 +41,9 @@ public class MailInfo {
         p.put("mail.smtp.host", this.mailServerHost);
         p.put("mail.smtp.port", this.mailServerPort);
         p.put("mail.smtp.auth", validate ? "true" : "false");
+        p.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        p.setProperty("mail.smtp.socketFactory.port", "465");
+        p.setProperty("mail.smtp.port", "465");
         return p;
     }
 

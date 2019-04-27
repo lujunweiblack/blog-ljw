@@ -95,7 +95,6 @@ public class SimpleMailSender {
         try {
             //    根据session 创建一个邮件消息
             Message mailMessage = new MimeMessage(sendMailSession);
-
             //创建邮件发送者地址
             Address from = new InternetAddress(mailInfo.getFromAddress(), "傻不拉几的二哈", "UTF-8");
             //设置邮件消息的发送者
@@ -103,10 +102,14 @@ public class SimpleMailSender {
 
             //创建邮件的接受者地址；并设置到邮件消息中
             //Message.RecipientType.TO表示接收者的类型为TO
-            InternetAddress[] internetAddresses = {new InternetAddress(mailInfo.getToAddress(), "爱谁谁", "UTF-8")};
+            String[] toAddresss = mailInfo.getToAddress().split(",");
+            String[] toUserNames = mailInfo.getToUserName().split(",");
+            InternetAddress[] internetAddresses = new InternetAddress[toAddresss.length];
+            for (int i = 0; i < toAddresss.length; i++) {
+                internetAddresses[i] = new InternetAddress(toAddresss[i], toUserNames[i], "UTF-8");
+            }
+
             mailMessage.addRecipients(Message.RecipientType.TO, internetAddresses);
-
-
             //设置邮件消息的主题
             mailMessage.setSubject(mailInfo.getSubject());
             //设置邮件消息发送的时间
@@ -135,7 +138,11 @@ public class SimpleMailSender {
             mailMessage.saveChanges();
 
             //发送邮件
+            log.info("=============== Start sending mail... ===============");
+            log.info("=============== ["+mailInfo.getToAddress()+"] ===============");
+            log.info("=============== ["+mailInfo.getToUserName()+"] ===============");
             Transport.send(mailMessage);
+            log.info("=============== Successful mail delivery ===============");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -106,7 +106,7 @@ public class DataBaseBackup {
      */
     public void startJob() {
         try {
-            String sysDate = new SimpleDateFormat("yyyy-hh-dd").format(new Date());
+            String sysDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             JDBCVo jdbcVo = new JDBCVo();
             jdbcVo.setIp("188.131.240.160");
             jdbcVo.setU("root");
@@ -137,7 +137,15 @@ public class DataBaseBackup {
                 MailInfo mailInfo = new MailInfo();
                 DataTools.parsingInputFormat(sendUsers, mailInfo);
                 mailInfo.setSubject("定时任务自动备份数据库邮件通知");
-                mailInfo.setContent("系统管理员\n    您好！您设定的 <定时任务自动备份数据库程序> 已经执行完毕，且已备份成功。\n 服务器备份路径: \n   /usr/share/nginx/html/backupDatabase/rbac_seurity_"+sysDate+".sql"+"\n   /usr/share/nginx/html/backupDatabase/blog-sbljdeh_"+sysDate+".sql");
+               String rbacSeurity = "rbac_seurity_"+sysDate+".sql";
+               String sbljdeh = "blog-sbljdeh_"+sysDate+".sql";
+                mailInfo.setContent("<h4><p>系统管理员:<p>\n" +
+                        "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您好！<font color='red'>定时任务自动备份数据库程序</font>已经执行完毕，且已备份成功。</p>\n" +
+                        "<p>服务器备份路径:</p> \n" +
+                        "   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ /usr/share/nginx/html/backupDatabase/"+rbacSeurity+" ]</p>\n" +
+                        "   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ /usr/share/nginx/html/backupDatabase/"+sbljdeh+" ]</p>\n" +
+                        "   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下载查看: <a href=http://lujunwei.com/backupDatabase/"+rbacSeurity+">"+rbacSeurity+"</a></p>\n" +
+                        "   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下载查看: <a href=http://lujunwei.com/backupDatabase/"+sbljdeh+">"+sbljdeh+"</a></p></h4>");
                 SendMail.send163(mailInfo);
             } else {
                 throw new InterruptedException();
