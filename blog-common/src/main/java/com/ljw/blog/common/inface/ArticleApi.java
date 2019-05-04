@@ -22,5 +22,8 @@ public interface ArticleApi {
 
     @PostMapping(value = "/portal/api/articleiNextId", consumes = MediaType.APPLICATION_JSON_VALUE)
     int articleiNextId();
+
+    @PostMapping(value = "/portal/api/article/sql", consumes = MediaType.APPLICATION_JSON_VALUE)
+    int articleInsertByPrimaryKeyAndSql(BArticle bArticle);
 }
 

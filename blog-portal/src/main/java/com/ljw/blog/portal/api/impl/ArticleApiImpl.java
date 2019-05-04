@@ -43,4 +43,9 @@ public class ArticleApiImpl implements ArticleApi {
             return bArticle.getArticleId();
         }
     }
+
+    @Override
+    public int articleInsertByPrimaryKeyAndSql(@RequestBody BArticle bArticle) {
+        return articleMapper.articleInsertByPrimaryKeyAndSql(bArticle);
+    }
 }

@@ -3,6 +3,7 @@ package com.ljw.blog.manage.ctrl;
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.manage.api.ArticleFeignClientApi;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,18 +31,20 @@ public class ManageArticleCtrl {
      */
     @PostMapping("/upAndDown")
     public String upAndDown(@RequestBody BArticle bArticle) {
-        if (bArticle.getArticleState() == 0) {
+        Date sysDate = new Date();
+        if (bArticle.getArticleState() == 1) {
             bArticle.setArticleState(1);
-            bArticle.setPublishDate(new Date());
-        } else if (bArticle.getArticleState() == 1) {
+            bArticle.setPublishDate(sysDate);
+        } else if (bArticle.getArticleState() == 0) {
             bArticle.setArticleState(0);
             bArticle.setPublishDate(null);
         } else {
-            bArticle.setArticleState(0);
+            bArticle.setArticleState(2);
             bArticle.setPublishDate(null);
         }
+        bArticle.setUpdateDate(sysDate);
 
-        articleFeignClientApi.articleInsertByPrimaryKey(bArticle);
+        articleFeignClientApi.articleInsertByPrimaryKeyAndSql(bArticle);
         return ResultBean.resultInit(ResultBean.SUCCESS);
     }
 

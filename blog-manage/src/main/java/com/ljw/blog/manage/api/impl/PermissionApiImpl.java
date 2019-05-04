@@ -1,5 +1,6 @@
 package com.ljw.blog.manage.api.impl;
 
+import com.ljw.blog.common.model.SysPermission;
 import com.ljw.blog.common.model.SysRole;
 import com.ljw.blog.manage.api.PermissionApi;
 import com.ljw.blog.manage.mapper.PermissionMapper;
@@ -17,5 +18,15 @@ public class PermissionApiImpl implements PermissionApi {
     @Override
     public List<SysRole> getPermByPermCode(String requestUrl) {
         return permissionMapper.getPermByPermCode(requestUrl);
+    }
+
+    @Override
+    public List<SysPermission> getPermByUserId(Integer userId) {
+        return permissionMapper.getPermByUserId(userId);
+    }
+
+    @Override
+    public SysPermission getPermById(Integer pid) {
+        return permissionMapper.getPermById(pid);
     }
 }
