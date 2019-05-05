@@ -2,7 +2,6 @@ package com.ljw.blog.portal.mapperSqlProvider;
 
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.tools.DataTools;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * @author: lujunwei
@@ -29,6 +28,10 @@ public class ArticleMapperArticleQueryProvider {
         }
         if (DataTools.dataIsNotNullAndEmpty(bArticle.getArticleId())) {
             sql.append(" and t.article_id = #{articleId} ");
+        }
+        if (DataTools.dataIsNotNullAndEmpty(bArticle.getArticleTitleName())) {
+            bArticle.setArticleTitleName("%"+bArticle.getArticleTitleName()+"%");
+            sql.append(" and t.article_title_name like #{articleTitleName} ");
         }
         sql.append("order by t.article_id desc");
         return sql.toString();

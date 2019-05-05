@@ -4,6 +4,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.DispatcherType;
+
 /**
  * @Author: lujunwei
  * @Date: 15:34 2019/5/1
@@ -15,8 +17,8 @@ public class BeanRegisterConfig {
     public FilterRegistrationBean createFilterBean() {
         //过滤器注册类
         FilterRegistrationBean registration = new FilterRegistrationBean(new JwtFilter());
-        registration.addUrlPatterns("/manage/user/menu"); //需要过滤的接口
-        registration.addInitParameter("exclusions","");
+        registration.addUrlPatterns("/*");
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
         return registration;
     }
 }

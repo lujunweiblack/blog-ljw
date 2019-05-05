@@ -1,37 +1,20 @@
 package com.ljw.blog.manage.ctrl;
 
-import com.ljw.blog.common.constant.SysRoleCon;
 import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.common.model.SysPermission;
-import com.ljw.blog.common.model.SysRole;
 import com.ljw.blog.common.model.SysUser;
 import com.ljw.blog.common.tools.DataTools;
-import com.ljw.blog.common.tools.ServletTools;
 import com.ljw.blog.common.vo.LoginVo;
 import com.ljw.blog.common.vo.MenuVo;
 import com.ljw.blog.common.vo.UserObj;
 import com.ljw.blog.manage.api.PermissionApi;
-import com.ljw.blog.manage.api.RoleApi;
 import com.ljw.blog.manage.api.UserApi;
 import com.ljw.blog.manage.tools.JWTUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.jws.soap.SOAPBinding;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.ljw.blog.common.constant.JwtCon.JWT_TOKEN_SYS_USER_ID;
-import static com.ljw.blog.common.constant.SysRoleCon.ROLE_SYS_ADMIN;
-import static com.ljw.blog.common.constant.SysRoleCon.ROLE_USER;
 
 /**
  * @author: lujunwei

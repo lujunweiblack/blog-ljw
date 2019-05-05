@@ -10,11 +10,11 @@ import java.util.UUID;
 public class JwtCon {
     public static final String JWT_ID = UUID.randomUUID().toString();
     /**
-     * token 过期时间, 单位: 秒. 这个值表示 30 天
+     * 60000 = 1分钟
      */
-    public static final long TOKEN_EXPIRED_TIME = 30 * 24 * 60 * 60;
+    public static final long TOKEN_EXPIRED_TIME = 60000*30;
 
-    public static final long TOKEN_EXPIRED_TIME_ = 1000000;
+    public static final long TOKEN_EXPIRED_TIME_ = 60000*5;
 
     /**
      * jwt 加密解密密钥
@@ -22,7 +22,12 @@ public class JwtCon {
     public static final String JWT_SECRET = "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=";
 
     /**
-     * jwt 加密解密密钥
+     * jwt UserId
      */
     public static final String JWT_TOKEN_SYS_USER_ID = "jwtTokenSysUserId";
+
+    /**
+     * 过滤拦截的uri
+     */
+    public static final String EXCLUSIONS_URI[] = {"/manage/user/login"};
 }

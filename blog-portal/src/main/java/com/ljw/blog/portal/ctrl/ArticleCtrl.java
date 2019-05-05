@@ -55,17 +55,5 @@ public class ArticleCtrl {
         return ResultBean.resultInit(ResultBean.SUCCESS, articlesVos);
     }
 
-    /**
-     * @author: lujunwei
-     * @param: [article]
-     * @return: java.lang.String
-     * @time: 12:58 2019/4/17
-     * @des: This is a function
-     */
-    @RequestMapping(value = "/article/page", method = RequestMethod.GET)
-    public String articleQueryPage(BArticle article, PageInfo pageInfo) {
-        PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-        List<BArticle> bArticles = articleApi.articleQuery(article);
-        return ResultBean.resultInit(ResultBean.SUCCESS, new PageInfo<>(bArticles));
-    }
+
 }
