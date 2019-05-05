@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
+import com.ljw.blog.common.vo.BArticleVo;
 import com.ljw.blog.manage.api.ArticleFeignClientApi;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +74,7 @@ public class ManageArticleCtrl {
      * @des: This is a function
      */
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String articleQueryPage(BArticle article, PageInfo pageInfo) {
-        PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-        List<BArticle> bArticles = articleFeignClientApi.articleQuery(article);
-        return ResultBean.resultInit(ResultBean.SUCCESS, new PageInfo<>(bArticles));
+    public String articleQueryPage(BArticleVo articlevo) {
+        return articleFeignClientApi.articleQueryPage(articlevo);
     }
 }

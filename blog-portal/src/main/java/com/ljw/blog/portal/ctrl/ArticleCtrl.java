@@ -1,8 +1,6 @@
 package com.ljw.blog.portal.ctrl;
 
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.ljw.blog.common.inface.ArticleApi;
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
@@ -54,6 +52,5 @@ public class ArticleCtrl {
         }
         return ResultBean.resultInit(ResultBean.SUCCESS, articlesVos);
     }
-
 
 }
