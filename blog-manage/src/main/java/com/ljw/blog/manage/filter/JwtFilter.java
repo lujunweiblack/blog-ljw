@@ -19,6 +19,7 @@ import static com.ljw.blog.common.constant.JwtCon.JWT_TOKEN_SYS_USER_ID;
  * @Desc:
  */
 public class JwtFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) {
 
@@ -29,12 +30,6 @@ public class JwtFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-//        response.setHeader("Access-Control-Allow-Origin", "*"); //解决跨域访问报错
-//        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-//        response.setHeader("Access-Control-Max-Age", "3600"); //设置过期时间
-//        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, client_id, uuid, Authorization");
-//        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // 支持HTTP 1.1.
-//        response.setHeader("Pragma", "no-cache"); // 支持HTTP 1.0. response.setHeader("Expires", "0");
 
         //不拦截的URI
         if (ServletTools.pathExclusions(request.getRequestURI(), EXCLUSIONS_URI)) {
@@ -46,6 +41,8 @@ public class JwtFilter implements Filter {
                 response.getWriter().write(ResultBean.resultInit(ResultBean.AUTHENTICATION_FAILED, "token is invalid"));
             } else {
                 request.setAttribute(JWT_TOKEN_SYS_USER_ID, claims.get(JWT_TOKEN_SYS_USER_ID));
+                //不等于null 就续费30分钟时长
+                //claims.setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRED_TIME));
                 filterChain.doFilter(request, response);
             }
         }
@@ -55,6 +52,5 @@ public class JwtFilter implements Filter {
     public void destroy() {
 
     }
-
 
 }

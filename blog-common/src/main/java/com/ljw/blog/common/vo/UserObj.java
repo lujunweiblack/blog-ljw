@@ -14,4 +14,5 @@ public class UserObj {
     private String userCode;
     private String phone;
     private String email;
+    private int id;
 }

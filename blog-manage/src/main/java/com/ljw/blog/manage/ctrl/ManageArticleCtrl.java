@@ -1,17 +1,13 @@
 package com.ljw.blog.manage.ctrl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.common.vo.BArticleVo;
 import com.ljw.blog.manage.api.ArticleFeignClientApi;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author: lujunwei

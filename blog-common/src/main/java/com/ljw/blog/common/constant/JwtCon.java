@@ -14,7 +14,7 @@ public class JwtCon {
      */
     public static final long TOKEN_EXPIRED_TIME = 60000*30;
 
-    public static final long TOKEN_EXPIRED_TIME_ = 60000*5;
+    //public static final long TOKEN_EXPIRED_TIME = 60000/10;
 
     /**
      * jwt 加密解密密钥

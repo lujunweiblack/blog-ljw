@@ -83,7 +83,7 @@ public class JWTUtils {
     public static String generateToken(SysUser sysUser) {
         Map<String,Object> claims = new HashMap<>();
         claims.put(JWT_TOKEN_SYS_USER_ID,sysUser.getId());
-        return createJWT(claims, TOKEN_EXPIRED_TIME_);
+        return createJWT(claims, TOKEN_EXPIRED_TIME);
     }
 
 
@@ -92,7 +92,9 @@ public class JWTUtils {
         SysUser sysUser = new SysUser();
         sysUser.setId(20190016);
         String s = generateToken(sysUser);
-        System.out.println(s);
-        System.out.println(verifyJwt(s));
+        //System.out.println(s);
+         Claims claims = verifyJwt("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJST09UIiwiand0VG9rZW5TeXNVc2VySWQiOjIwMTkwMDE2LCJleHAiOjE1NTcyOTg4MTgsImlhdCI6MTU1NzI5ODgxMiwianRpIjoiYTQyMTkyYWQtNTcxMi00Yjg5LWFlM2EtOTBhNDI4OGM1MTRiIn0.b4k075yJhqTFDAO7G_vIxZOybycjeAcfqlECMct6XGA\n");
+        System.out.println(claims);
+        //claims.setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRED_TIME));
     }
 }

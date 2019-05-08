@@ -26,7 +26,7 @@ public class DataTools {
      */
     public static boolean dataIsNotNullAndEmpty(Object o) {
 
-        if (o == null || "".equals(o.toString().trim())) {
+        if (o == null || "".equals(o.toString().trim()) || "0".equals(o.toString().trim())) {
             return false;
         }
         return true;
