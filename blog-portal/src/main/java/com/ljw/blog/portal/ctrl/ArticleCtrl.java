@@ -52,4 +52,5 @@ public class ArticleCtrl {
         }
         return ResultBean.resultInit(ResultBean.SUCCESS, articlesVos);
     }
+
 }

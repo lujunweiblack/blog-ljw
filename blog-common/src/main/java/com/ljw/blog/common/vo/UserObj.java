@@ -1,9 +1,6 @@
 package com.ljw.blog.common.vo;
 
-import com.ljw.blog.common.model.SysRole;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * @author: lujunwei
@@ -12,9 +9,10 @@ import java.util.List;
  */
 @Data
 public class UserObj {
-    private String userCode;
+    private String token;
     private String userName;
+    private String userCode;
     private String phone;
     private String email;
-    private List<SysRole> sysRoles;
+    private int id;
 }

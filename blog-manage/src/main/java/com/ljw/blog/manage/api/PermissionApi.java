@@ -1,6 +1,7 @@
 package com.ljw.blog.manage.api;
 
 
+import com.ljw.blog.common.model.SysPermission;
 import com.ljw.blog.common.model.SysRole;
 
 import java.util.List;
@@ -12,4 +13,7 @@ import java.util.List;
  */
 public interface PermissionApi {
     List<SysRole> getPermByPermCode(String requestUrl);
+    List<SysPermission> getPermByUserId(Integer userId);
+
+    SysPermission getPermById(Integer pid);
 }

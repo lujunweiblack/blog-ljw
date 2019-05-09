@@ -1,7 +1,11 @@
 package com.ljw.blog.portal.api.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ljw.blog.common.model.BArticle;
+import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.common.tools.DataTools;
+import com.ljw.blog.common.vo.BArticleVo;
 import com.ljw.blog.portal.mapper.ArticleMapper;
 import com.ljw.blog.common.inface.ArticleApi;
 import org.apache.commons.lang.StringUtils;
@@ -42,5 +46,17 @@ public class ArticleApiImpl implements ArticleApi {
             articleMapper.articleiNextId(bArticle);
             return bArticle.getArticleId();
         }
+    }
+
+    @Override
+    public int articleInsertByPrimaryKeyAndSql(@RequestBody BArticle bArticle) {
+        return articleMapper.articleInsertByPrimaryKeyAndSql(bArticle);
+    }
+
+    @Override
+    public String articleQueryPage(@RequestBody BArticleVo articlevo) {
+        PageHelper.startPage(articlevo.getPageNum(), articlevo.getPageSize());
+        List<BArticle> bArticles = articleMapper.articleQueryPage(articlevo);
+        return ResultBean.resultInit(ResultBean.SUCCESS,new PageInfo(bArticles));
     }
 }

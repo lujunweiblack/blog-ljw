@@ -4,12 +4,16 @@ import java.util.Date;
 
 import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
-import com.ljw.blog.common.tools.DataTools;
+import com.ljw.blog.common.model.SysUser;
 import com.ljw.blog.common.tools.QiNiuTool;
 import com.ljw.blog.manage.api.ArticleFeignClientApi;
+import com.ljw.blog.manage.api.UserApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
+import static com.ljw.blog.common.constant.JwtCon.JWT_TOKEN_SYS_USER_ID;
 import static com.ljw.blog.common.tools.QiNiuTool.*;
 
 /**
@@ -24,6 +28,9 @@ public class AddCtrl {
 
     @Autowired
     private ArticleFeignClientApi articleFeignClientApi;
+
+    @Autowired
+    private UserApi userApi;
 
     /**
      * @author: lujunwei
@@ -48,19 +55,20 @@ public class AddCtrl {
      * @des: This is a function
      */
     @PostMapping("/complete")
-    public String save(@RequestBody BArticle bArticle) {
+    public String save(@RequestBody BArticle bArticle, HttpServletRequest request) {
 
         //上传.md的文件到七牛云
         String fileName = BUCKET_PREFIX_MD + bArticle.getArticleId() + BUCKET_SUFFIX_MD;
         QiNiuTool.inputStreamUpload(fileName, BLOG_ARTICLE, bArticle.getBackupFieldOne());
-
+        SysUser user = new SysUser();
+        user.setId(Integer.parseInt(request.getAttribute(JWT_TOKEN_SYS_USER_ID).toString()));
+        SysUser userByUser = userApi.findUserByUser(user);
         /*-----------临时设置基本数据------------*/
         Date sysDate = new Date();
         bArticle.setArticleId(bArticle.getArticleId());
         bArticle.setArticleDetailUrl(fileName);
-        bArticle.setArticleType(1);
-        bArticle.setAuthorId(20190016);
-        bArticle.setAuthorName("lujunwei");
+        bArticle.setAuthorId(userByUser.getId());
+        bArticle.setAuthorName(userByUser.getUserName());
         bArticle.setCategoryId(10000913);
         bArticle.setCategoryName("陆军委组织");
         bArticle.setPublishDate(bArticle.getArticleState() == 1 ? sysDate : null);

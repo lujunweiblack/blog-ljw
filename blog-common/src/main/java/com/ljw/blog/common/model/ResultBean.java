@@ -17,6 +17,7 @@ public class ResultBean implements Serializable {
     public final static String FAIL = "10400";
     public final static String UN_AUTHORIZED = "10300";
     public final static String NOT_LOGGED_IN = "10000";
+    public final static String AUTHENTICATION_FAILED = "10500";
 
     private final static String CODE = "code";
     private final static String MSG = "msg";

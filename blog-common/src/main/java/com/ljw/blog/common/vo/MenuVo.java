@@ -1,13 +1,16 @@
-package com.ljw.blog.common.model;
-
-
+package com.ljw.blog.common.vo;
 
 import lombok.Data;
-import javax.persistence.Id;
 
+import java.util.List;
+
+/**
+ * @Author: lujunwei
+ * @Date: 21:50 2019/5/1
+ * @Desc:
+ */
 @Data
-public class SysPermission {
-    @Id
+public class MenuVo {
     private Integer id;
     private String name;
     private String icon;
@@ -15,6 +18,5 @@ public class SysPermission {
     private String path;
     private String type;
     private Integer parentId;
-    private String sort;
-    private String available;
+    private List<MenuVo> menuVo;
 }
