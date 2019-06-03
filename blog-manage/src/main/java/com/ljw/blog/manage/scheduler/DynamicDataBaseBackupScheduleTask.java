@@ -19,7 +19,7 @@ import static com.ljw.blog.common.constant.SchedulerCon.DATABASE_BACKUP;
  */
 @Configuration
 @EnableScheduling
-public class DynamicScheduleTask implements SchedulingConfigurer {
+public class DynamicDataBaseBackupScheduleTask implements SchedulingConfigurer {
 
     @Autowired
     private CronMapper cronMapper;
