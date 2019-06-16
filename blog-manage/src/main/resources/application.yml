@@ -32,4 +32,10 @@ eureka:
     serviceUrl:
       defaultZone: ${blog-manage.service-url.defaultZone}
 
+blog:
+  manage:
+    gitalk:
+      label: Gitalk
+      auto-init-url: https://api.github.com/repos/lujunweiblack/blog-ljw-gitalk/issues
+
 
