@@ -14,6 +14,7 @@ mybatis:
 server:
   port: ${blog-manage.server.port}
 logging:
+  file: /home/logs/manage/blog-manage.log
   level:
     com:
       ljw:
