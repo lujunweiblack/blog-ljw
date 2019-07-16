@@ -6,9 +6,13 @@ import com.ljw.blog.common.model.BArticle;
 import com.ljw.blog.common.model.ResultBean;
 import com.ljw.blog.common.model.SysUser;
 import com.ljw.blog.common.tools.QiNiuTool;
+import com.ljw.blog.common.tools.RestTemplateTools;
+import com.ljw.blog.common.vo.IssuesDto;
+import com.ljw.blog.common.vo.RestTemplateParam;
 import com.ljw.blog.manage.api.ArticleFeignClientApi;
 import com.ljw.blog.manage.api.UserApi;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ljw.blog.manage.config.GitalkConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +25,23 @@ import static com.ljw.blog.common.tools.QiNiuTool.*;
  * @time: 15:03 2019/4/15
  * @des:
  */
+@Slf4j
 @RestController
 @RequestMapping(value = "/manage/add")
 @CrossOrigin
 public class AddCtrl {
 
-    @Autowired
-    private ArticleFeignClientApi articleFeignClientApi;
+    private final ArticleFeignClientApi articleFeignClientApi;
 
-    @Autowired
-    private UserApi userApi;
+    private final UserApi userApi;
+
+    private final GitalkConfig gitalkConfig;
+
+    public AddCtrl(ArticleFeignClientApi articleFeignClientApi, UserApi userApi, GitalkConfig gitalkConfig) {
+        this.articleFeignClientApi = articleFeignClientApi;
+        this.userApi = userApi;
+        this.gitalkConfig = gitalkConfig;
+    }
 
     /**
      * @author: lujunwei
@@ -75,6 +86,26 @@ public class AddCtrl {
         bArticle.setCreateDate(sysDate);
         bArticle.setUpdateDate(sysDate);
         /*-----------临时设置基本数据------------*/
+
+        /*-----------初始化评论系统------------*/
+        IssuesDto issuesDto = new IssuesDto();
+        issuesDto.setTitle("傻不拉几的二哈 - " + bArticle.getArticleId());
+        issuesDto.setBody("Automatically initialize article reviews");
+        issuesDto.setLabels(new String[]{bArticle.getArticleId().toString(), gitalkConfig.getProperties().getLabel()});
+        RestTemplateParam restTemplateParam = new RestTemplateParam();
+        restTemplateParam.setHeaders(RestTemplateTools.fillheaders());
+        restTemplateParam.setUrl(gitalkConfig.getProperties().getAutoInitUrl());
+        restTemplateParam.setParam(issuesDto);
+        try {
+            RestTemplateTools.sendPost(restTemplateParam);
+            log.info("============= Comment System Initialization Successful ============= ");
+        } catch (Exception e) {
+            log.error("============= Comment on system initialization failure ============= ");
+            e.printStackTrace();
+            log.error("============= Comment on system initialization failure ============= ");
+        }
+
+        /*-----------初始化评论系统------------*/
 
         //将文章的基本信息插入到数据库
         articleFeignClientApi.articleInsertByPrimaryKey(bArticle);

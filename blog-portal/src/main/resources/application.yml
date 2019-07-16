@@ -17,6 +17,7 @@ server:
   port: ${blog-portal.server.port}
 
 logging:
+  file: /home/logs/portal/blog-portal.log
   level:
     com:
       ljw:

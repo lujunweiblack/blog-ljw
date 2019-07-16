@@ -24,6 +24,9 @@ spring:
 server:
   port: ${blog-gateway.server.port}
 
+logging:
+  file: /home/logs/gateway/blog-gateway.log
+
 eureka:
 #  instance:
 #    prefer-ip-address: true
